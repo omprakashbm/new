@@ -105,7 +105,7 @@ export default function Hospital() {
     const getData = async () => {
       let { data:hdata, loading:hloading, dataIndex:hdataIndex } = await fetchURL(`https://backend.motdev.ran.org.np/about/api/hospital/${language}/`);
       let { data:edata, loading:eloading, dataIndex:edataIndex } = await fetchURL(`https://backend.motdev.ran.org.np/about/api/equipment/${language}/`);
-      console.log(edata);
+      // console.log(edata);
       if(!(edata==null)){
         let equipmentAllData= await convertData(edata.results);
         setEquipemntData({ results: equipmentAllData });
