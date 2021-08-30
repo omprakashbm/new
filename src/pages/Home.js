@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { ThemeProvider, makeStyles } from "@material-ui/core/styles";
 import { fetchURL } from "../apiComponents/FetchComponent";
 import { LanguageContext } from "../App";
@@ -112,8 +112,18 @@ const Home = () => {
     titleen: "eng title",
     titlenp: "np title",
   };
+  let history = useHistory();
 
-  console.log("allOrganization", allOrganization?.results);
+  function handleClick(click) {
+    // console.log("click", click);
+    if (click === 8) {
+      history.push("/about/members");
+    } else if (click === 7) {
+      history.push("/hospital");
+    }
+  }
+  // console.log("allOrganization", allOrganization?.results);
+  // console.log("achievementData", achievementData);
   return (
     <>
       {/* {homeData[`title${language}`]} */}
@@ -160,13 +170,28 @@ const Home = () => {
         <Box display="flex" justifyContent="center" flexWrap="wrap">
           {achievementData.results.map((achievement, index) => {
             return (
-              <Box display="flex" {...circleprops2} key={achievement.id}>
+              <Box
+                display="flex"
+                {...circleprops2}
+                key={achievement.id}
+                href={() => {}}
+                onClick={() => handleClick(achievement.id)}
+              >
+                {/* <Link
+                  key={achievement.id}
+                  to={{
+                    pathname: `/about/members`,
+                    // pathname: `/img/${achievement.id}`,
+                  }}
+                  style={{ textDecoration: "none" }}
+                > */}
                 <Box borderRadius="50%" {...circleProps}>
                   {achievement.number}+
                 </Box>
                 <Typography gutterBottom variant="h5" component="h2">
                   {achievement.title}
                 </Typography>
+                {/* </Link> */}
               </Box>
             );
           })}
