@@ -82,6 +82,7 @@ const circleprops2 = {
 };
 
 const Home = () => {
+  let history = useHistory();
   let language = useContext(LanguageContext);
   const [achievementData, setAchievementData] = useState({ results: [] });
   const [allOrganization, setAllOrganization] = useState({ results: [] });
@@ -112,13 +113,11 @@ const Home = () => {
     titleen: "eng title",
     titlenp: "np title",
   };
-  let history = useHistory();
 
   function handleClick(click) {
-    // console.log("click", click);
-    if (click === 8) {
+    if (click === "Members") {
       history.push("/about/members");
-    } else if (click === 7) {
+    } else if (click === "Hospital Mapped") {
       history.push("/hospital");
     }
   }
@@ -175,7 +174,7 @@ const Home = () => {
                 {...circleprops2}
                 key={achievement.id}
                 href={() => {}}
-                onClick={() => handleClick(achievement.id)}
+                onClick={() => handleClick(achievement.title)}
               >
                 {/* <Link
                   key={achievement.id}
