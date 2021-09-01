@@ -72,6 +72,7 @@ const circleprops2 = {
     flexGrow: 1,
     color: "#0D6199",
     flexDirection: "column",
+    cursor: "pointer",
     //   justifyContent:'space-between',
     alignItems: "center",
     padding: "1rem",
@@ -121,8 +122,7 @@ const Home = () => {
       history.push("/hospital");
     }
   }
-  // console.log("allOrganization", allOrganization?.results);
-  // console.log("achievementData", achievementData);
+
   return (
     <>
       {/* {homeData[`title${language}`]} */}
