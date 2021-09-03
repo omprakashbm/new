@@ -95,7 +95,7 @@ const Home = () => {
   
     useEffect(() => {
     const getData = async () => {
-      let { data, loading, dataIndex } = await fetchURL(`http://backend.motdev.ran.org.np/about/api/achievement/${language}/`);
+      let { data, loading, dataIndex } = await fetchURL(`https://backend.motdev.ran.org.np/about/api/achievement/${language}/`);
       setAchievementData(data);
     }
     getData();

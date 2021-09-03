@@ -1,6 +1,6 @@
 {
   "name": "motfrontend",
-  "homepage":"https://missionoxygenteam.org/",
+  "homepage": "https://missionoxygenteam.org/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

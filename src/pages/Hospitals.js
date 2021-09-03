@@ -6,6 +6,19 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import Modal from '@material-ui/core/Modal';
+
+
+function getModalStyle() {
+  const top = 50;
+  const left = 50;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -95,11 +108,33 @@ const columnsEquipment = [
 
 
 export default function Hospital() {
+
+  const classe = useStyles();
+  // getModalStyle is not a pure function, we roll the style only on the first render
+  const [modalStyle] = React.useState(getModalStyle);
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const body = (
+    <div style={modalStyle} className={classe.paper}>
+      <h2 id="simple-modal-title">Text in a modal</h2>
+      
+    </div>
+  );
+
+
   const classes = useStyles();
   let language = useContext(LanguageContext);
   const [hospitalData, setHospitalData] = useState({ results: [] });
   const [equipemntData, setEquipemntData] = useState({ results: [] });
-
+  const [filterEquipmentData, setFilterEquipmentData] = useState(null);
 
   useEffect(() => {
     const getData = async () => {
@@ -129,6 +164,13 @@ export default function Hospital() {
 
   }
 
+  const equipmentShow = (id) =>  {
+    // console.log(id);
+    // console.log(equipemntData.results.filter(value => value.hospital==id));
+    setFilterEquipmentData(equipemntData.results.filter(value => value.hospital==id))
+    handleOpen();
+  }
+
   return (
     <div className={classes.root}>
       <Card className={classes.root}>
@@ -142,10 +184,27 @@ export default function Hospital() {
               rows={hospitalData.results}
               columns={columnsHospital}
               pageSize={10}
+              onCellClick={(event) => {
+                equipmentShow(event.id);
+              }}
             />
           </div>}
         </CardContent>  
       </Card>
+
+      <Modal
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="simple-modal-title"
+      aria-describedby="simple-modal-description"
+      style={
+        {
+          top:'10%',
+          left: '10%',
+          width: '75%'
+        }
+      }
+      >
       <Card className={classes.root}>
         <CardContent className={classes.root}>
           <Typography gutterBottom variant="h5" component="h2" color="primary">
@@ -154,13 +213,17 @@ export default function Hospital() {
            {equipemntData &&
           <div style={{ height: 600, width: '100%' }}>
             <DataGrid
-              rows={equipemntData.results}
+              rows={filterEquipmentData}
               columns={columnsEquipment}
               pageSize={10}
+              
             />
           </div>}
         </CardContent>  
       </Card>
+
+      </Modal>
+
     </div>
   );
 }
