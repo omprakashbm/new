@@ -29,7 +29,7 @@ const columnsHospital = [
   {
     field: "name",
     headerName: "Name",
-    width: 400,
+    width: 250,
   },
   {
     field: "contact_number",
@@ -47,51 +47,80 @@ const columnsHospital = [
     width: 150,
   },
   {
+    field: "district",
+    headerName: "District",
+    width: 200,
+  },
+  {
+    field: "ward",
+    headerName: "Ward",
+    width: 200,
+  },
+  {
     field: "address",
     headerName: "Address",
-    width: 500,
+    width: 300,
   },
 ];
+
 const columnsEquipment = [
   {
     field: "id",
     headerName: "ID",
-    width: 90,
+    flexGrow: 1,
   },
-  {
-    field: "hospital_id",
-    headerName: "Hospital ID",
-    width: 150,
-  },
+
   {
     field: "hospital_name",
     headerName: "Hospital Name",
-    width: 400,
+    width: 180,
   },
   {
     field: "equipment_type",
     headerName: "Equipment Type",
-    width: 300,
+    width: 180,
+  },
+  {
+    field: "eqiupment_status",
+    headerName: "Eqiupment Status",
+    // renderCell: (row) => console.log(row),
+    renderCell: (row) => (
+      <div
+        style={{
+          background: row.value === "Operational" ? "green" : "red",
+          borderRadius: "15px",
+          width: "130px",
+          textAlign: "center",
+          color: "white",
+          // height: "47px",
+        }}
+      >
+        {row.value}
+      </div>
+    ),
+    width: 190,
   },
   {
     field: "unit",
     headerName: "Unit",
-    width: 150,
+    width: 110,
   },
+
   {
     field: "company_name",
     headerName: "Company",
-    width: 500,
+    width: 150,
   },
+
   {
     field: "suppliers",
     headerName: "Suppliers",
-    width: 500,
+    width: 150,
   },
   {
     field: "remarks",
     headerName: "Remarks",
-    width: 1000,
+    width: 200,
   },
 ];
 
@@ -103,10 +132,6 @@ export default function Hospital() {
   const [selected, setSelected] = useState(null);
   const [open, setOpen] = useState(false);
   const [filterData, setFilterData] = useState(columnsEquipment);
-
-  // console.log("selected", selected);
-  // console.log("equipemntData", equipemntData);
-  // console.log("filterData", filterData);
 
   const handleClose = (value) => {
     setOpen(false);
@@ -127,14 +152,18 @@ export default function Hospital() {
         loading: hloading,
         dataIndex: hdataIndex,
       } = await fetchURL(
-        `https://backend.motdev.ran.org.np/about/api/hospital/${language}/`
+        `https://mot.naxa.com.np/about/api/hospital/np/`
+        // `https://mot.naxa.com.np/about/api/hospital/${language}/`
+        // `https://backend.motdev.ran.org.np/about/api/hospital/${language}/`
       );
       let {
         data: edata,
         loading: eloading,
         dataIndex: edataIndex,
       } = await fetchURL(
-        `https://backend.motdev.ran.org.np/about/api/equipment/${language}/`
+        `https://mot.naxa.com.np/about/api/equipment/np/`
+        // `https://mot.naxa.com.np/about/api/equipment/${language}/`
+        // `https://backend.motdev.ran.org.np/about/api/equipment/${language}/`
       );
 
       if (!(edata == null)) {
@@ -173,6 +202,7 @@ export default function Hospital() {
                   setSelected(item);
                   setOpen(true);
                 }}
+                style={{ cursor: "pointer" }}
                 rows={hospitalData.results}
                 columns={columnsHospital}
                 pageSize={10}
@@ -199,16 +229,16 @@ export default function Hospital() {
             >
               Equipments Data {selected?.row?.name}
             </Typography>
-            {/* {equipemntData && (
-              <div style={{ height: 600, width: "100%" }}>
+            {equipemntData && (
+              <div style={{ height: 400, width: "100%" }}>
                 <DataGrid
-                  rows={equipemntData.results}
+                  rows={filterData}
                   columns={columnsEquipment}
                   pageSize={10}
                 />
               </div>
-            )} */}
-
+            )}
+            {/* 
             {equipemntData ? (
               <div style={{ height: 400, width: "100%" }}>
                 <DataGrid
@@ -220,7 +250,7 @@ export default function Hospital() {
               </div>
             ) : (
               <tr>No data Available</tr>
-            )}
+            )} */}
           </CardContent>
         </Dialog>
       </Card>
