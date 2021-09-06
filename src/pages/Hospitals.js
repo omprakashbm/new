@@ -3,6 +3,7 @@ import { DataGrid } from "@material-ui/data-grid";
 import { fetchURL } from "../apiComponents/FetchComponent";
 import { LanguageContext } from "../App";
 import Typography from "@material-ui/core/Typography";
+import { Dialog } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -28,7 +29,7 @@ const columnsHospital = [
   {
     field: "name",
     headerName: "Name",
-    width: 400,
+    width: 250,
   },
   {
     field: "contact_number",
@@ -46,51 +47,80 @@ const columnsHospital = [
     width: 150,
   },
   {
+    field: "district",
+    headerName: "District",
+    width: 200,
+  },
+  {
+    field: "ward",
+    headerName: "Ward",
+    width: 200,
+  },
+  {
     field: "address",
     headerName: "Address",
-    width: 500,
+    width: 300,
   },
 ];
+
 const columnsEquipment = [
   {
     field: "id",
     headerName: "ID",
-    width: 90,
+    flexGrow: 1,
   },
-  {
-    field: "hospital_id",
-    headerName: "Hospital ID",
-    width: 150,
-  },
+
   {
     field: "hospital_name",
     headerName: "Hospital Name",
-    width: 400,
+    width: 180,
   },
   {
     field: "equipment_type",
     headerName: "Equipment Type",
-    width: 300,
+    width: 180,
+  },
+  {
+    field: "eqiupment_status",
+    headerName: "Eqiupment Status",
+    // renderCell: (row) => console.log(row),
+    renderCell: (row) => (
+      <div
+        style={{
+          background: row.value === "Operational" ? "green" : "red",
+          borderRadius: "15px",
+          width: "130px",
+          textAlign: "center",
+          color: "white",
+          // height: "47px",
+        }}
+      >
+        {row.value}
+      </div>
+    ),
+    width: 190,
   },
   {
     field: "unit",
     headerName: "Unit",
-    width: 150,
+    width: 110,
   },
+
   {
     field: "company_name",
     headerName: "Company",
-    width: 500,
+    width: 150,
   },
+
   {
     field: "suppliers",
     headerName: "Suppliers",
-    width: 500,
+    width: 150,
   },
   {
     field: "remarks",
     headerName: "Remarks",
-    width: 1000,
+    width: 200,
   },
 ];
 
@@ -99,6 +129,21 @@ export default function Hospital() {
   let language = useContext(LanguageContext);
   const [hospitalData, setHospitalData] = useState({ results: [] });
   const [equipemntData, setEquipemntData] = useState({ results: [] });
+  const [selected, setSelected] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [filterData, setFilterData] = useState(columnsEquipment);
+
+  const handleClose = (value) => {
+    setOpen(false);
+    // setSelected(value);
+  };
+
+  useEffect(() => {
+    setFilterData(
+      equipemntData.results.filter((dt) => dt?.hospital === selected?.id)
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selected]);
 
   useEffect(() => {
     const getData = async () => {
@@ -107,14 +152,18 @@ export default function Hospital() {
         loading: hloading,
         dataIndex: hdataIndex,
       } = await fetchURL(
-        `https://backend.motdev.ran.org.np/about/api/hospital/${language}/`
+        `https://mot.naxa.com.np/about/api/hospital/np/`
+        // `https://mot.naxa.com.np/about/api/hospital/${language}/`
+        // `https://backend.motdev.ran.org.np/about/api/hospital/${language}/`
       );
       let {
         data: edata,
         loading: eloading,
         dataIndex: edataIndex,
       } = await fetchURL(
-        `https://backend.motdev.ran.org.np/about/api/equipment/${language}/`
+        `https://mot.naxa.com.np/about/api/equipment/np/`
+        // `https://mot.naxa.com.np/about/api/equipment/${language}/`
+        // `https://backend.motdev.ran.org.np/about/api/equipment/${language}/`
       );
 
       if (!(edata == null)) {
@@ -149,6 +198,11 @@ export default function Hospital() {
           {hospitalData && (
             <div style={{ height: 600, width: "100%" }}>
               <DataGrid
+                onRowClick={(item) => {
+                  setSelected(item);
+                  setOpen(true);
+                }}
+                style={{ cursor: "pointer" }}
                 rows={hospitalData.results}
                 columns={columnsHospital}
                 pageSize={10}
@@ -157,21 +211,48 @@ export default function Hospital() {
           )}
         </CardContent>
       </Card>
+
       <Card className={classes.root}>
-        <CardContent className={classes.root}>
-          <Typography gutterBottom variant="h5" component="h2" color="primary">
-            Equipments Data
-          </Typography>
-          {equipemntData && (
-            <div style={{ height: 600, width: "100%" }}>
-              <DataGrid
-                rows={equipemntData.results}
-                columns={columnsEquipment}
-                pageSize={10}
-              />
-            </div>
-          )}
-        </CardContent>
+        <Dialog
+          onClose={handleClose}
+          // aria-labelledby="simple-dialog-title"
+          open={open}
+          fullWidth={true}
+          maxWidth={"lg"}
+        >
+          <CardContent className={classes.root}>
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="h2"
+              color="primary"
+            >
+              Equipments Data {selected?.row?.name}
+            </Typography>
+            {equipemntData && (
+              <div style={{ height: 400, width: "100%" }}>
+                <DataGrid
+                  rows={filterData}
+                  columns={columnsEquipment}
+                  pageSize={10}
+                />
+              </div>
+            )}
+            {/* 
+            {equipemntData ? (
+              <div style={{ height: 400, width: "100%" }}>
+                <DataGrid
+                  rows={filterData}
+                  // rows={equipemntData.results}
+                  columns={columnsEquipment}
+                  pageSize={10}
+                />
+              </div>
+            ) : (
+              <tr>No data Available</tr>
+            )} */}
+          </CardContent>
+        </Dialog>
       </Card>
     </div>
   );
