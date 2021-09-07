@@ -182,18 +182,18 @@ export default function Hospital() {
         loading: hloading,
         dataIndex: hdataIndex,
       } = await fetchURL(
-        `https://mot.naxa.com.np/about/api/hospital/np/`
+        // `https://mot.naxa.com.np/about/api/hospital/np/`
         // `https://mot.naxa.com.np/about/api/hospital/${language}/`
-        // `https://backend.motdev.ran.org.np/about/api/hospital/${language}/`
+        `https://backend.motdev.ran.org.np/about/api/hospital/${language}/`
       );
       let {
         data: edata,
         loading: eloading,
         dataIndex: edataIndex,
       } = await fetchURL(
-        `https://mot.naxa.com.np/about/api/equipment/np/`
+        // `https://mot.naxa.com.np/about/api/equipment/np/`
         // `https://mot.naxa.com.np/about/api/equipment/${language}/`
-        // `https://backend.motdev.ran.org.np/about/api/equipment/${language}/`
+        `https://backend.motdev.ran.org.np/about/api/equipment/${language}/`
       );
 
       if (!(edata == null)) {
