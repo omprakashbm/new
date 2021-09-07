@@ -92,7 +92,7 @@ const Home = () => {
     const getData = async () => {
 
       let { data, loading, dataIndex } = await fetchURL(
-        `http://backend.motdev.ran.org.np/about/api/achievement/${language}/`
+        `https://backend.motdev.ran.org.np/about/api/achievement/${language}/`
       );
       setAchievementData(data);
     };
