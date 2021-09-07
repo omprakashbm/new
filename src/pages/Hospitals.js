@@ -3,7 +3,8 @@ import { DataGrid } from "@material-ui/data-grid";
 import { fetchURL } from "../apiComponents/FetchComponent";
 import { LanguageContext } from "../App";
 import Typography from "@material-ui/core/Typography";
-import { Dialog } from "@material-ui/core";
+import { Dialog, Button, IconButton } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -26,6 +27,25 @@ const columnsHospital = [
     headerName: "ID",
     width: 90,
   },
+
+  {
+    field: "date",
+    headerName: "View Detail",
+    renderCell: (params) => (
+      <strong>
+        <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          style={{ marginLeft: 16 }}
+        >
+          View Detail
+        </Button>
+      </strong>
+    ),
+    width: 150,
+  },
+
   {
     field: "name",
     headerName: "Name",
@@ -87,12 +107,22 @@ const columnsEquipment = [
     renderCell: (row) => (
       <div
         style={{
-          background: row.value === "Operational" ? "green" : "red",
-          borderRadius: "15px",
-          width: "130px",
+          background:
+            row.value === "Operational"
+              ? "#0e80008c"
+              : row.value === "Not Operational"
+              ? "#ff000075"
+              : row.value === "In Maintenance"
+              ? "rgb(187 187 36 / 84%)"
+              : "",
+          borderRadius: "25px",
+          width: "112px",
           textAlign: "center",
           color: "white",
-          // height: "47px",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "34px",
+          display: "flex",
         }}
       >
         {row.value}
@@ -199,6 +229,7 @@ export default function Hospital() {
             <div style={{ height: 600, width: "100%" }}>
               <DataGrid
                 onRowClick={(item) => {
+                  console.log(item);
                   setSelected(item);
                   setOpen(true);
                 }}
@@ -220,6 +251,13 @@ export default function Hospital() {
           fullWidth={true}
           maxWidth={"lg"}
         >
+          <IconButton
+            aria-label="close"
+            onClick={handleClose}
+            style={{ display: "flex", justifyContent: "flex-end" }}
+          >
+            <CloseIcon />
+          </IconButton>
           <CardContent className={classes.root}>
             <Typography
               gutterBottom
