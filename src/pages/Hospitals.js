@@ -7,6 +7,19 @@ import { Dialog } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import Modal from '@material-ui/core/Modal';
+
+
+function getModalStyle() {
+  const top = 50;
+  const left = 50;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -125,10 +138,33 @@ const columnsEquipment = [
 ];
 
 export default function Hospital() {
+
+  const classe = useStyles();
+  // getModalStyle is not a pure function, we roll the style only on the first render
+  const [modalStyle] = React.useState(getModalStyle);
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const body = (
+    <div style={modalStyle} className={classe.paper}>
+      <h2 id="simple-modal-title">Text in a modal</h2>
+      
+    </div>
+  );
+
+
   const classes = useStyles();
   let language = useContext(LanguageContext);
   const [hospitalData, setHospitalData] = useState({ results: [] });
   const [equipemntData, setEquipemntData] = useState({ results: [] });
+
   const [selected, setSelected] = useState(null);
   const [open, setOpen] = useState(false);
   const [filterData, setFilterData] = useState(columnsEquipment);
@@ -188,6 +224,13 @@ export default function Hospital() {
     return dataCopy;
   };
 
+  const equipmentShow = (id) =>  {
+    // console.log(id);
+    // console.log(equipemntData.results.filter(value => value.hospital==id));
+    setFilterEquipmentData(equipemntData.results.filter(value => value.hospital==id))
+    handleOpen();
+  }
+
   return (
     <div className={classes.root}>
       <Card className={classes.root}>
@@ -195,65 +238,53 @@ export default function Hospital() {
           <Typography gutterBottom variant="h5" component="h2" color="primary">
             Hospital Data
           </Typography>
-          {hospitalData && (
-            <div style={{ height: 600, width: "100%" }}>
-              <DataGrid
-                onRowClick={(item) => {
-                  setSelected(item);
-                  setOpen(true);
-                }}
-                style={{ cursor: "pointer" }}
-                rows={hospitalData.results}
-                columns={columnsHospital}
-                pageSize={10}
-              />
-            </div>
-          )}
-        </CardContent>
+          {hospitalData &&
+          <div style={{ height: 600, width: '100%' }}>
+            <DataGrid
+              rows={hospitalData.results}
+              columns={columnsHospital}
+              pageSize={10}
+              onCellClick={(event) => {
+                equipmentShow(event.id);
+              }}
+            />
+          </div>}
+        </CardContent>  
       </Card>
 
+      <Modal
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="simple-modal-title"
+      aria-describedby="simple-modal-description"
+      style={
+        {
+          top:'10%',
+          left: '10%',
+          width: '75%'
+        }
+      }
+      >
       <Card className={classes.root}>
-        <Dialog
-          onClose={handleClose}
-          // aria-labelledby="simple-dialog-title"
-          open={open}
-          fullWidth={true}
-          maxWidth={"lg"}
-        >
-          <CardContent className={classes.root}>
-            <Typography
-              gutterBottom
-              variant="h5"
-              component="h2"
-              color="primary"
-            >
-              Equipments Data {selected?.row?.name}
-            </Typography>
-            {equipemntData && (
-              <div style={{ height: 400, width: "100%" }}>
-                <DataGrid
-                  rows={filterData}
-                  columns={columnsEquipment}
-                  pageSize={10}
-                />
-              </div>
-            )}
-            {/* 
-            {equipemntData ? (
-              <div style={{ height: 400, width: "100%" }}>
-                <DataGrid
-                  rows={filterData}
-                  // rows={equipemntData.results}
-                  columns={columnsEquipment}
-                  pageSize={10}
-                />
-              </div>
-            ) : (
-              <tr>No data Available</tr>
-            )} */}
-          </CardContent>
-        </Dialog>
+        <CardContent className={classes.root}>
+          <Typography gutterBottom variant="h5" component="h2" color="primary">
+                Equipments Data
+          </Typography>
+           {equipemntData &&
+          <div style={{ height: 600, width: '100%' }}>
+            <DataGrid
+              rows={filterEquipmentData}
+              columns={columnsEquipment}
+              pageSize={10}
+              
+            />
+          </div>}
+        </CardContent>  
+
       </Card>
+
+      </Modal>
+
     </div>
   );
 }
