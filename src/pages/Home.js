@@ -301,7 +301,19 @@ const Home = () => {
             alt="TAF logo"
             className={classes.logo}
           />
+          <img style={{backgroundColor: '#062f52', marginTop: '18px'}}
+            src={"/datafordev.png"}
+            onClick={() =>
+              window.open(
+                "http://www.d4dnepal.org/" ,
+                "_blank"
+              )
+            }
+            alt="TAF logo"
+            className={classes.logo}
+          />
         </Box>
+        
       </Box>
     </>
   );
