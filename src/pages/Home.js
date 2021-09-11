@@ -90,7 +90,6 @@ const Home = () => {
 
   useEffect(() => {
     const getData = async () => {
-
       let { data, loading, dataIndex } = await fetchURL(
         `https://backend.motdev.ran.org.np/about/api/achievement/${language}/`
       );
@@ -121,7 +120,9 @@ const Home = () => {
       history.push("/about/members");
     } else if (click === "Hospital Mapped") {
       history.push("/hospital");
-    }
+    } else if (click === "Oxygen Concentrator Tested") {
+      history.push("/oc");
+    } else if (click === "Request Solved") history.push("/RS");
   }
 
   return (
@@ -301,19 +302,14 @@ const Home = () => {
             alt="TAF logo"
             className={classes.logo}
           />
-          <img style={{backgroundColor: '#062f52', marginTop: '18px'}}
+          <img
+            style={{ backgroundColor: "#062f52", marginTop: "18px" }}
             src={"/datafordev.png"}
-            onClick={() =>
-              window.open(
-                "http://www.d4dnepal.org/" ,
-                "_blank"
-              )
-            }
+            onClick={() => window.open("http://www.d4dnepal.org/", "_blank")}
             alt="TAF logo"
             className={classes.logo}
           />
         </Box>
-        
       </Box>
     </>
   );
