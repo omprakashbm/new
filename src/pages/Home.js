@@ -26,7 +26,7 @@ const circleProps = {
     alignItems: "center",
     color: "white",
     boxShadow: "5px 10px 18px #888888",
-    fontSize: "3rem",
+    fontSize: "2rem",
   },
 };
 const homeProps = {
