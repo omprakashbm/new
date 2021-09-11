@@ -92,7 +92,7 @@ const Home = () => {
     const getData = async () => {
 
       let { data, loading, dataIndex } = await fetchURL(
-        `http://backend.motdev.ran.org.np/about/api/achievement/${language}/`
+        `https://backend.motdev.ran.org.np/about/api/achievement/${language}/`
       );
       setAchievementData(data);
     };
@@ -301,7 +301,19 @@ const Home = () => {
             alt="TAF logo"
             className={classes.logo}
           />
+          <img style={{backgroundColor: '#062f52', marginTop: '18px'}}
+            src={"/datafordev.png"}
+            onClick={() =>
+              window.open(
+                "http://www.d4dnepal.org/" ,
+                "_blank"
+              )
+            }
+            alt="TAF logo"
+            className={classes.logo}
+          />
         </Box>
+        
       </Box>
     </>
   );
