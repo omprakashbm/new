@@ -184,7 +184,7 @@ export default function Hospital() {
       } = await fetchURL(
         // `https://mot.naxa.com.np/about/api/hospital/np/`
         // `https://mot.naxa.com.np/about/api/hospital/${language}/`
-        `https://backend.motdev.ran.org.np/about/api/hospital/${language}/`
+        `https://backend.motdev.ran.org.np/about/api/hospital/np/`
       );
       let {
         data: edata,
