@@ -1,47 +1,46 @@
-import React, { useContext } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import React, { useContext } from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { makeStyles, createTheme } from "@material-ui/core/styles";
-import { ThemeProvider } from '@material-ui/styles';
+import { ThemeProvider } from "@material-ui/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import Home from './pages/Home';
-import About from './pages/About';
-import RequestHelp from './pages/RequestHelp';
-import ApplyMember from './pages/ApplyMember';
-import Navbar from './Navbar';
-import NotFound from './pages/404NotFound';
-import NewsResources from './pages/NewsResources';
-import Footer from './Footer';
-import Lead from './aboutcomponents/Lead';
-import Member from './aboutcomponents/Member';
-import Donation from './pages/Donation';
-import Hospital from './pages/Hospitals';
-
+import Home from "./pages/Home";
+import About from "./pages/About";
+import RequestHelp from "./pages/RequestHelp";
+import ApplyMember from "./pages/ApplyMember";
+import Navbar from "./Navbar";
+import NotFound from "./pages/404NotFound";
+import NewsResources from "./pages/NewsResources";
+import Footer from "./Footer";
+import Lead from "./aboutcomponents/Lead";
+import Member from "./aboutcomponents/Member";
+import Donation from "./pages/Donation";
+import Hospital from "./pages/Hospitals";
+import OxygenConcentratorTested from "./pages/OxygenConcentratorTested";
+import RequestSolved from "./pages/RequestSolved";
 
 const useStyles = makeStyles((theme) => ({
   languageCss: {
-    display: 'flex',
-    justifyContent: 'flex-end',
+    display: "flex",
+    justifyContent: "flex-end",
   },
   formControl: {
     margin: theme.spacing(1),
     width: 130,
-
   },
   selectEmpty: {
-    marginTop: theme.spacing(2)
-  }
+    marginTop: theme.spacing(2),
+  },
 }));
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#0D6199',//#3b6ba5
+      main: "#0D6199", //#3b6ba5
     },
     secondary: {
-      main: '#72a5d3',
+      main: "#72a5d3",
     },
-
   },
 });
 const LanguageContext = React.createContext();
@@ -49,7 +48,6 @@ const LanguageContext = React.createContext();
 function App() {
   const classes = useStyles();
   const [language, setLanguage] = React.useState("en");
-
 
   const handleChange = (event) => {
     console.log(event.target.value);
@@ -106,7 +104,13 @@ function App() {
               <Route exact path="/hospital">
                 <Hospital />
               </Route>
-              
+              <Route exact path="/oc">
+                <OxygenConcentratorTested />
+              </Route>
+              <Route exact path="/RS">
+                <RequestSolved />
+              </Route>
+
               <Route path="*">
                 <NotFound />
               </Route>
@@ -120,4 +124,3 @@ function App() {
 }
 
 export { App, LanguageContext };
-
