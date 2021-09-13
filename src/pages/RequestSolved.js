@@ -51,18 +51,25 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     margin: "0 auto",
     alignSelf: "center",
-    height: "200px",
-    width: "200px",
+    height: "220px",
+    width: "300px",
   },
   Doc: {
+    margin: "0 auto",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     marginTop: "5rem",
+    border: "1px solid hsl(205, 78%, 40%)",
+    color: "hsl(205, 78%, 40%)",
+    width: "160px",
+    height: "35px",
+    borderRadius: 9,
   },
   head: {
     fontWeight: "600",
     color: "hsl(205, 78%, 40%)",
+    padding: "1px",
   },
 }));
 
@@ -71,6 +78,7 @@ export default function RequestSolved() {
   const [info, setInfo] = useState({ results: [] });
   const [readMore, setReadMore] = useState(false);
   const [loading, setloading] = useState(true);
+  const [dataIndex, setdataIndex] = useState(0);
 
   //   useEffect(() => {
   //     const getData = async () => {
@@ -81,36 +89,32 @@ export default function RequestSolved() {
   //     };
   //     getData();
   //   }, [language]);
-
-  //   useEffect(() => {
-  //     const getData = async () => {
-  //       let { data, loading } = await fetchURL(
-  //         "http://backend.motdev.ran.org.np/about/api/solve/en/"
-  //       );
-  //       setInfo(data);
-  //       setloading(loading);
-  //     };
-  //     getData();
-  //   }, []);
-
-  const getData = async () => {
-    const resp = await fetch(
-      "http://backend.motdev.ran.org.np/about/api/solve/en/"
-    );
-    setInfo(await resp.json());
-    setloading(false);
-  };
+  let expandCount = [];
+  if (dataIndex) {
+    for (let i = 0; i <= dataIndex; i++) {
+      expandCount.push(false);
+    }
+  }
 
   useEffect(() => {
+    const getData = async () => {
+      let { data, loading, dataIndex } = await fetchURL(
+        "http://backend.motdev.ran.org.np/about/api/solve/en/"
+      );
+      setInfo(data);
+      setloading(loading);
+      setdataIndex(dataIndex);
+    };
     getData();
   }, []);
+
   return (
     <div className={classes.container}>
-      {/* {loading && (
+      {loading && (
         <Typography variant="body2" color="textSecondary" component="p">
           Loading...
         </Typography>
-      )} */}
+      )}
       {info &&
         info.results.map((solved) => {
           return (
@@ -173,19 +177,21 @@ export default function RequestSolved() {
                   </div>
                   <div>
                     <div>
-                      <img src={solved.img} alt="img" className={classes.img} />
+                      <img
+                        src={solved.image}
+                        alt="img"
+                        className={classes.img}
+                      />
                     </div>
                     {solved.document ? (
-                      <div className={classes.Doc}>
-                        <Button
-                          variant="outlined"
-                          color="primary"
-                          sizes="medium"
-                          download=""
+                      <div>
+                        <a
+                          style={{ textDecoration: "none" }}
                           href={solved.document}
+                          className={classes.Doc}
                         >
                           View Document.
-                        </Button>
+                        </a>
                       </div>
                     ) : (
                       ""
