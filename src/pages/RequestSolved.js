@@ -3,12 +3,30 @@ import { fetchURL } from "../apiComponents/FetchComponent";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import { Button } from "@material-ui/core";
+import Modal from '@material-ui/core/Modal';
+
+
 
 import CardContent from "@material-ui/core/CardContent";
 
 import Typography from "@material-ui/core/Typography";
 
 // import { LanguageContext } from "../App";
+
+function rand() {
+  return Math.round(Math.random() * 20) - 10;
+}
+
+function getModalStyle() {
+  const top = 50 + rand();
+  const left = 50 + rand();
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,6 +44,16 @@ const useStyles = makeStyles((theme) => ({
     margin: "2rem",
     boxShadow: " 0 5px 15px rgba(0, 0, 0, 0.2)",
   },
+  paper: {
+    position: 'absolute',
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+
+
   container: {
     display: "flex",
     flexWrap: "wrap",
@@ -33,10 +61,13 @@ const useStyles = makeStyles((theme) => ({
     "& > *": {
       margin: theme.spacing(1),
     },
+    flexWrap: 'wrap'
+     
   },
   field: {
     display: "flex",
     alignItems: "center",
+    flexWrap: 'wrap'
   },
   button: {
     background: "transparent",
@@ -79,6 +110,27 @@ export default function RequestSolved() {
   const [readMore, setReadMore] = useState(false);
   const [loading, setloading] = useState(true);
   const [dataIndex, setdataIndex] = useState(0);
+  const [modalIndex, setModalIndex] = useState({});
+
+  // getModalStyle is not a pure function, we roll the style only on the first render
+  const [modalStyle] = React.useState(getModalStyle);
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  // created_date: "2021-09-12T12:29:57.501846Z"
+  // document: "https://docs.google.com/document/d/1n0ugFP0cYm8alNjE8LAQG9aIk2Te-pcS/edit?usp=drive_web&ouid=110948504301113125867&rtpof=true"
+  // edited_date: "2021-09-13T03:14:54.047593Z"
+  // id: 1
+  // image: "http://backend.motdev.ran.org.np/about/solve/1/c0e15fc5b0a8751878fb7ccf17c4fa89.jpg"
+  // request_for: "kljaklsdjkl"
+  // request_from: "kasdklj"
+  // support_provided: "jaklsjdkl"
 
   //   useEffect(() => {
   //     const getData = async () => {
@@ -104,12 +156,114 @@ export default function RequestSolved() {
       setInfo(data);
       setloading(loading);
       setdataIndex(dataIndex);
+      setModalIndex(info.results[0])
     };
     getData();
+
+    
   }, []);
+
+  const body = (
+    <div style={modalStyle} className={classes.paper}>
+      <h2 id="simple-modal-title">Text in a modal</h2>
+      
+      {modalIndex && <Card className={classes.root} key={modalIndex.id}>
+                <CardContent>
+                  <div className={classes.field}>
+                    <h3 className={classes.head}>Request From:</h3>
+                    <Typography
+                      align="justify"
+                      variant="body1"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      <p style={{ paddingLeft: "1rem" }}>
+                        {modalIndex.request_from}
+                      </p>
+                    </Typography>
+                  </div>
+                  <div className={classes.field}>
+                    <h3 className={classes.head}>Request For:</h3>
+                    <Typography
+                      align="justify"
+                      variant="body1"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      <p style={{ paddingLeft: "1rem" }}>
+                        {modalIndex.request_for}
+                      </p>
+                    </Typography>
+                  </div>
+                  <div className={classes.field}>
+                    <h3 className={classes.head}>Service Provided:</h3>
+                    <Typography
+                      align="justify"
+                      variant="body1"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      <p style={{ paddingLeft: "1rem" }}>
+                        {modalIndex.support_provided}
+                      </p>
+                    </Typography>
+                  </div>
+                  {/* <div className={classes.field}>
+                    <h3 className={classes.head}>Details:</h3>
+                    <Typography variant="body1" color="textSecondary">
+                      <p style={{ paddingLeft: "1rem" }}>{modalIndex.de}</p>
+                    </Typography>
+                  </div> */}
+                  <div>
+                    <div>
+                      <img
+                        src={modalIndex.image}
+                        alt="img"
+                        className={classes.img}
+                      />
+                    </div>
+                    {modalIndex.document ? (
+                      <div>
+                        <a
+                          style={{ textDecoration: "none" }}
+                          href={modalIndex.document}
+                          className={classes.Doc}
+                          target="_blank"
+                        >
+                          View Document.
+                        </a>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+        }
+    </div>
+  );
+
+  const cardClicked = (id) => {
+    setModalIndex(info.results.filter(data => data.id == id)[0]);
+    console.log(modalIndex);
+    setOpen(true);
+  }
+  
 
   return (
     <div className={classes.container}>
+      <div>
+      {modalIndex && <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        {modalIndex && body}
+      </Modal>
+      }
+    </div>
+
       {loading && (
         <Typography variant="body2" color="textSecondary" component="p">
           Loading...
@@ -118,7 +272,7 @@ export default function RequestSolved() {
       {info &&
         info.results.map((solved) => {
           return (
-            <div>
+            <div onClick={() => cardClicked(solved.id)}>
               <Card className={classes.root} key={solved.id}>
                 <CardContent>
                   <div className={classes.field}>
