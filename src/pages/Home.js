@@ -303,9 +303,16 @@ const Home = () => {
             className={classes.logo}
           />
           <img
-            style={{ backgroundColor: "#062f52", marginTop: "18px" }}
+            style={{ backgroundColor: "#062f52", marginTop: "28px" }}
             src={"/datafordev.png"}
             onClick={() => window.open("http://www.d4dnepal.org/", "_blank")}
+            alt="TAF logo"
+            className={classes.logo}
+          />
+
+          <img
+            src={"/ukaid2.png"}
+            onClick={() => window.open("https://www.ukaiddirect.org/", "_blank")}
             alt="TAF logo"
             className={classes.logo}
           />

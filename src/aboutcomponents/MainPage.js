@@ -48,7 +48,7 @@ export default function MainPage() {
 
             To fight these challenges, Robotics Association of Nepal [RAN], Biotechnology Society of Nepal [BSN] and Biomedical Engineering Foundation Nepal [BEFN] are working together as a Mission Oxygen Team [MOT] with Nepal Biomedical Association [NBA] as a supporting organization where we are recruiting Engineers with Biomedical background or have previously worked on Biomedical devices to install, operate, maintain and operate the Oxygen facilities all over Nepal as we three organization together would mobilize the members and other interested volunteers to solve these existing challenge. We have established Memorandum of Understanding [MoU] with Non-Resident Nepali Associations, Nepal Ventilators Banks, Pawan BioScientific Engineering Services, Sagarmatha Biomedical Engineering Service Concern Pvt. Ltd.  and Nepal Health Equipment Development Foundation [NHEDF].
             </Typography>
-            <img src={'/mot5.jpg'} alt="ecg" className={classes.logo} />   
+            <img src={'/mot5.jpg'} alt="ecg" className={classes.logo} style={{maxHeight: '460px', maxWidth: '600px', margin: '0 auto 0 auto'}} />   
             <Typography align='justify' variant="body1" color="textSecondary" component="p">
               Mission Oxygen Team [MOT] will be the team to reach out for any technical help : Documentation, tracking, service and maintenance. We are already working with COVID Alliance team, Nepal Ventilators Bank, FNCCI Covid Crisis Support team and other civil society groups
             </Typography>

@@ -182,13 +182,14 @@ export default function RequestSolved() {
         onClose={handleClose}
         // aria-labelledby="simple-dialog-title"
         open={open}
-        fullWidth={true}
+        fullWidth={false}
         maxWidth={"lg"}
+        style={{height:'auto', overflow:'auto'}}
       >
         <IconButton
           aria-label="close"
           onClick={handleClose}
-          style={{ display: "flex", justifyContent: "flex-end" }}
+          style={{ display: "flex", justifyContent: "flex-end",width:'auto', height: 'auto' }}
         >
           <CloseIcon />
         </IconButton>

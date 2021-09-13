@@ -57,7 +57,7 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
-          <div className={classes.languageCss}>
+          {/* <div className={classes.languageCss}>
             <FormControl variant="filled" className={classes.formControl}>
               <InputLabel htmlFor="filled-age-native-simple">
                 Select Language
@@ -67,7 +67,7 @@ function App() {
                 <option value={"np"}>Nepali</option>
               </Select>
             </FormControl>
-          </div>
+          </div> */}
           <LanguageContext.Provider value={language}>
             <Navbar />
             <Switch>
