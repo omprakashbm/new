@@ -189,6 +189,7 @@ export default function RequestSolved() {
                           style={{ textDecoration: "none" }}
                           href={solved.document}
                           className={classes.Doc}
+                          target="_blank"
                         >
                           View Document.
                         </a>
