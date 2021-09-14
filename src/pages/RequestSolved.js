@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 import React, { useContext, useState, useEffect } from "react";
 import { fetchURL } from "../apiComponents/FetchComponent";
 import { makeStyles } from "@material-ui/core/styles";
@@ -71,7 +72,6 @@ const useStyles = makeStyles((theme) => ({
   img: {
     display: "block",
     margin: "0 auto",
-    alignSelf: "center",
     height: "220px",
     width: "300px",
   },
@@ -93,30 +93,31 @@ const useStyles = makeStyles((theme) => ({
     padding: "1px",
   },
 
-  main: {
-    marginTop: "5%",
-    width: "80%",
-    minHeight: "60%",
-    marginLeft: "10%",
-    justifyContent: "center",
-  },
   paper: {
+    height: "660",
+    position: "fixed",
+    margin: "5%",
+    width: "80%",
+    marginLeft: "10%",
     display: "flex",
     justifyContent: "center",
-    width: "80%",
-    minHeight: "60%",
-    backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    backgroundColor: "white",
+    borderRadius: 12,
+    marginBottom: "5%",
   },
-  modelRoot: {
-    width: "100%",
+  Doc1: {
+    margin: "0 auto",
     display: "flex",
+    justifyContent: "center",
     alignItems: "center",
-    height: "100%",
-    boxShadow: " 0 5px 15px rgba(0, 0, 0, 0.2)",
+    marginTop: "3rem",
+    border: "1px solid hsl(205, 78%, 40%)",
+    color: "hsl(205, 78%, 40%)",
+    width: "160px",
+    height: "35px",
+    borderRadius: 9,
   },
+  scrolll: { maxHeight: "200px", overFlow: "hidden", overFlowY: "scroll" },
 }));
 
 export default function RequestSolved() {
@@ -156,12 +157,13 @@ export default function RequestSolved() {
   //     };
   //     getData();
   //   }, [language]);
-  let expandCount = [];
-  if (dataIndex) {
-    for (let i = 0; i <= dataIndex; i++) {
-      expandCount.push(false);
-    }
-  }
+
+  // let expandCount = [];
+  // if (dataIndex) {
+  //   for (let i = 0; i <= dataIndex; i++) {
+  //     expandCount.push(false);
+  //   }
+  // }
 
   useEffect(() => {
     const getData = async () => {
@@ -178,96 +180,69 @@ export default function RequestSolved() {
 
   const body = (
     <div className={classes.main}>
-      <Dialog
-        onClose={handleClose}
-        // aria-labelledby="simple-dialog-title"
-        open={open}
-        fullWidth={false}
-        maxWidth={"lg"}
-        style={{height:'auto', overflow:'auto'}}
-      >
-        <IconButton
-          aria-label="close"
-          onClick={handleClose}
-          style={{ display: "flex", justifyContent: "flex-end",width:'auto', height: 'auto' }}
-        >
-          <CloseIcon />
-        </IconButton>
-        {modalIndex && (
-          <Card className={classes.modelRoot} key={modalIndex.id}>
-            <CardContent>
-              <div className={classes.field}>
-                <h3 className={classes.head}>Request From:</h3>
-                <Typography
-                  align="justify"
-                  variant="body1"
-                  color="textSecondary"
-                  component="p"
-                >
-                  <p style={{ paddingLeft: "1rem" }}>
-                    {modalIndex.request_from}
-                  </p>
-                </Typography>
-              </div>
-              <div className={classes.field}>
-                <h3 className={classes.head}>Request For:</h3>
-                <Typography
-                  align="justify"
-                  variant="body1"
-                  color="textSecondary"
-                  component="p"
-                >
-                  <p style={{ paddingLeft: "1rem" }}>
-                    {modalIndex.request_for}
-                  </p>
-                </Typography>
-              </div>
-              <div className={classes.field}>
-                <h3 className={classes.head}>Service Provided:</h3>
-                <Typography
-                  align="justify"
-                  variant="body1"
-                  color="textSecondary"
-                  component="p"
-                >
-                  <p style={{ paddingLeft: "1rem" }}>
-                    {modalIndex.support_provided}
-                  </p>
-                </Typography>
-              </div>
-              {/* <div className={classes.field}>
-                    <h3 className={classes.head}>Details:</h3>
-                    <Typography variant="body1" color="textSecondary">
-                      <p style={{ paddingLeft: "1rem" }}>{modalIndex.de}</p>
-                    </Typography>
-                  </div> */}
-              <div>
-                <div>
-                  <img
-                    src={modalIndex.image}
-                    alt="img"
-                    className={classes.img}
-                  />
-                </div>
-                {modalIndex.document ? (
-                  <div>
-                    <a
-                      style={{ textDecoration: "none" }}
-                      href={modalIndex.document}
-                      className={classes.Doc}
-                      target="_blank"
-                    >
-                      View Document.
-                    </a>
-                  </div>
-                ) : (
-                  ""
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        )}
-      </Dialog>
+      {modalIndex && (
+        <Card className={classes.paper} key={modalIndex.id}>
+          <CardContent className={classes.scroll}>
+            <IconButton
+              aria-label="close"
+              onClick={handleClose}
+              style={{ float: "right" }}
+            >
+              <CloseIcon />
+            </IconButton>
+            <div className={classes.field}>
+              <h3 className={classes.head}>Request From:</h3>
+              <Typography
+                align="justify"
+                variant="body1"
+                color="textSecondary"
+                component="p"
+              >
+                <p style={{ paddingLeft: "1rem" }}>{modalIndex.request_from}</p>
+              </Typography>
+            </div>
+            <div className={classes.field}>
+              <h3 className={classes.head}>Request For:</h3>
+              <Typography
+                align="justify"
+                variant="body1"
+                color="textSecondary"
+                component="p"
+              >
+                <p style={{ paddingLeft: "1rem" }}>{modalIndex.request_for}</p>
+              </Typography>
+            </div>
+            <div className={classes.field}>
+              <h3 className={classes.head}>Service Provided:</h3>
+              <Typography
+                align="justify"
+                variant="body1"
+                color="textSecondary"
+                component="p"
+              >
+                <p style={{ paddingLeft: "1rem" }}>
+                  {modalIndex.support_provided}
+                </p>
+              </Typography>
+            </div>
+
+            <img src={modalIndex.image} alt="img" className={classes.img} />
+
+            {modalIndex.document ? (
+              <a
+                style={{ textDecoration: "none" }}
+                href={modalIndex.document}
+                className={classes.Doc1}
+                target="_blank"
+              >
+                View Document.
+              </a>
+            ) : (
+              ""
+            )}
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 
@@ -329,7 +304,6 @@ export default function RequestSolved() {
                       </p>
                     </Typography>
                   </div>
-                  
                   <div>
                     <div>
                       <img
