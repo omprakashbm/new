@@ -14,13 +14,10 @@ import Typography from "@material-ui/core/Typography";
 
 // import { LanguageContext } from "../App";
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
 
 function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
+  const top = 50;
+  const left = 50;
 
   return {
     top: `${top}%`,
@@ -177,11 +174,11 @@ export default function RequestSolved() {
     };
     getData();
   }, []);
-
+  
   const body = (
     <div className={classes.main}>
       {modalIndex && (
-        <Card className={classes.paper} key={modalIndex.id}>
+        <Card className={classes.paper} key={modalIndex.id} style={{height: '80%', overflow:'scroll'}}>
           <CardContent className={classes.scroll}>
             <IconButton
               aria-label="close"
