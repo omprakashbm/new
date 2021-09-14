@@ -249,6 +249,7 @@ const Home = () => {
             Lead Organizations
           </Typography>
           <img
+            style={{ width: "250px", marginTop: "20px" }}
             src={"/BSNlogo.jpg"}
             alt="BSN logo"
             onClick={() =>
@@ -259,6 +260,7 @@ const Home = () => {
             }
             className={classes.logo}
           />
+
           <img
             src={"/ranlogo.png"}
             onClick={() =>
@@ -276,6 +278,7 @@ const Home = () => {
             Partner Organization
           </Typography>
           <img
+            style={{ marginTop: "20px" }}
             src={"/NHRClogo.png"}
             onClick={() =>
               window.open(
@@ -292,6 +295,7 @@ const Home = () => {
             Supporting Organization
           </Typography>
           <img
+            style={{ marginTop: "20px", width: "250px" }}
             src={"/TAFlogo.jpg"}
             onClick={() =>
               window.open(
@@ -303,7 +307,7 @@ const Home = () => {
             className={classes.logo}
           />
           <img
-            style={{ backgroundColor: "#062f52", marginTop: "28px" }}
+            style={{ width: "250px", marginTop: "28px" }}
             src={"/datafordev.png"}
             onClick={() => window.open("http://www.d4dnepal.org/", "_blank")}
             alt="TAF logo"
@@ -311,8 +315,11 @@ const Home = () => {
           />
 
           <img
+            style={{ width: "250px" }}
             src={"/ukaid2.png"}
-            onClick={() => window.open("https://www.ukaiddirect.org/", "_blank")}
+            onClick={() =>
+              window.open("https://www.ukaiddirect.org/", "_blank")
+            }
             alt="TAF logo"
             className={classes.logo}
           />

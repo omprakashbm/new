@@ -42,7 +42,7 @@ export default function MainPage() {
           <Typography gutterBottom variant="h5" component="h2">
             <h4>Background:</h4>
           </Typography>
-          <img src={"/logo.jpg"} alt="logo" className={classes.logo} />
+          <img src={"/logo1.jpg"} alt="logo" className={classes.logo} />
 
           <Typography
             align="justify"
