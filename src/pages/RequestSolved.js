@@ -166,7 +166,7 @@ export default function RequestSolved() {
   useEffect(() => {
     const getData = async () => {
       let { data, loading, dataIndex } = await fetchURL(
-        "http://backend.motdev.ran.org.np/about/api/solve/en/"
+        "https://backend.motdev.ran.org.np/about/api/solve/en/"
       );
       setInfo(data);
       setloading(loading);
@@ -329,34 +329,7 @@ export default function RequestSolved() {
                       </p>
                     </Typography>
                   </div>
-                  <div className={classes.field}>
-                    <h3 className={classes.head}>Service Provided:</h3>
-                    <Typography
-                      align="justify"
-                      variant="body1"
-                      color="textSecondary"
-                      component="p"
-                    >
-                      <p style={{ paddingLeft: "1rem" }}>
-                        {readMore
-                          ? solved.support_provided
-                          : `${solved.support_provided.substring(0, 100)}...`}
-                        <button
-                          className={classes.button}
-                          onClick={() => setReadMore(!readMore)}
-                        >
-                          {/* for toggle !  */}
-                          {readMore ? "show less" : "  read more"}
-                        </button>
-                      </p>
-                    </Typography>
-                  </div>
-                  <div className={classes.field}>
-                    <h3 className={classes.head}>Details:</h3>
-                    <Typography variant="body1" color="textSecondary">
-                      <p style={{ paddingLeft: "1rem" }}>{solved.details}</p>
-                    </Typography>
-                  </div>
+                  
                   <div>
                     <div>
                       <img
@@ -365,20 +338,6 @@ export default function RequestSolved() {
                         className={classes.img}
                       />
                     </div>
-                    {solved.document ? (
-                      <div>
-                        <a
-                          style={{ textDecoration: "none" }}
-                          href={solved.document}
-                          className={classes.Doc}
-                          target="_blank"
-                        >
-                          View Document.
-                        </a>
-                      </div>
-                    ) : (
-                      ""
-                    )}
                   </div>
                 </CardContent>
               </Card>
