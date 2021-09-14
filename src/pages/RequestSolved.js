@@ -14,7 +14,6 @@ import Typography from "@material-ui/core/Typography";
 
 // import { LanguageContext } from "../App";
 
-
 function getModalStyle() {
   const top = 50;
   const left = 50;
@@ -41,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
     padding: ".25rem",
     margin: "2rem",
     boxShadow: " 0 5px 15px rgba(0, 0, 0, 0.2)",
+    cursor: "pointer",
   },
 
   container: {
@@ -76,8 +76,8 @@ const useStyles = makeStyles((theme) => ({
     margin: "0 auto",
     display: "flex",
     justifyContent: "center",
+    marginTop: "2rem",
     alignItems: "center",
-    marginTop: "5rem",
     border: "1px solid hsl(205, 78%, 40%)",
     color: "hsl(205, 78%, 40%)",
     width: "160px",
@@ -102,18 +102,19 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 12,
     marginBottom: "5%",
   },
-  Doc1: {
-    margin: "0 auto",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: "3rem",
-    border: "1px solid hsl(205, 78%, 40%)",
-    color: "hsl(205, 78%, 40%)",
-    width: "160px",
-    height: "35px",
-    borderRadius: 9,
-  },
+  // Doc1: {
+  //   margin: "0 auto",
+  //   display: "flex",
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   marginTop: "3rem",
+  //   marginBottom: "3rem",
+  //   border: "1px solid hsl(205, 78%, 40%)",
+  //   color: "hsl(205, 78%, 40%)",
+  //   width: "160px",
+  //   height: "35px",
+  //   borderRadius: 9,
+  // },
   scrolll: { maxHeight: "200px", overFlow: "hidden", overFlowY: "scroll" },
 }));
 
@@ -174,11 +175,15 @@ export default function RequestSolved() {
     };
     getData();
   }, []);
-  
+
   const body = (
     <div className={classes.main}>
       {modalIndex && (
-        <Card className={classes.paper} key={modalIndex.id} style={{height: '80%', overflow:'scroll'}}>
+        <Card
+          className={classes.paper}
+          key={modalIndex.id}
+          style={{ height: "80%", overflowY: "scroll" }}
+        >
           <CardContent className={classes.scroll}>
             <IconButton
               aria-label="close"
@@ -229,7 +234,7 @@ export default function RequestSolved() {
               <a
                 style={{ textDecoration: "none" }}
                 href={modalIndex.document}
-                className={classes.Doc1}
+                className={classes.Doc}
                 target="_blank"
               >
                 View Document.
