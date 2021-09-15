@@ -101,8 +101,8 @@ const columnsEquipment = [
     width: 180,
   },
   {
-    field: "eqiupment_status",
-    headerName: "Eqiupment Status",
+    field: "equipment_status",
+    headerName: "Equipment Status",
     // renderCell: (row) => console.log(row),
     renderCell: (row) => (
       <div
