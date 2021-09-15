@@ -95,8 +95,8 @@ export default function Lead() {
   return (
     <div>
       <img src={'/BOD.jpg'} alt="ecg" className={classes.imageSize} /> <br></br> 
-      <img src={'/technical team.jpg'} alt="ecg" className={classes.imageSize} />  <br></br> 
-      <img src={'/advisor.jpg'} alt="ecg" className={classes.imageSize} />  <br></br> 
+      <img src={'/techteam.png'} alt="ecg" className={classes.imageSize} />  <br></br> 
+      <img src={'/Portal Launch.jpg'} alt="ecg" className={classes.imageSize} />  <br></br> 
       <img src={'/management.jpg'} alt="ecg" className={classes.imageSize} />  <br></br> 
 
     </div>
