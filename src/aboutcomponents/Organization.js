@@ -14,8 +14,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: 350,
     height:'auto',
-    display: 'flex',
-
     '& > *': {
       margin: theme.spacing(1),
 
