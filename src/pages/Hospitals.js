@@ -22,17 +22,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const columnsHospital = [
-  {
-    field: "id",
-    headerName: "ID",
-    width: 90,
-  },
+  // {
+  //   field: "id",
+  //   headerName: "ID",
+  //   width: 90,
+  // },
 
   {
     field: "date",
     headerName: "View Detail",
     renderCell: (params) => (
-      <strong>
+      <strong style={{ position: "sticky" }}>
         <Button
           variant="contained"
           color="primary"
@@ -71,24 +71,26 @@ const columnsHospital = [
     headerName: "District",
     width: 200,
   },
-  {
-    field: "ward",
-    headerName: "Ward",
-    width: 200,
-  },
+
   {
     field: "address",
     headerName: "Address",
     width: 300,
   },
+  {
+    field: "Biochemical Equipment",
+    headerName: "Biochemical Equipment",
+    width: 400,
+    height: 200,
+  },
 ];
 
 const columnsEquipment = [
-  {
-    field: "id",
-    headerName: "ID",
-    flexGrow: 1,
-  },
+  // {
+  //   field: "id",
+  //   headerName: "ID",
+  //   flexGrow: 1,
+  // },
 
   {
     field: "hospital_name",
@@ -101,8 +103,8 @@ const columnsEquipment = [
     width: 180,
   },
   {
-    field: "equipment_status",
-    headerName: "Equipment Status",
+    field: "eqiupment_status",
+    headerName: "Eqiupment Status",
     // renderCell: (row) => console.log(row),
     renderCell: (row) => (
       <div
@@ -145,7 +147,7 @@ const columnsEquipment = [
   {
     field: "suppliers",
     headerName: "Suppliers",
-    width: 150,
+    width: 450,
   },
   {
     field: "remarks",
@@ -251,13 +253,6 @@ export default function Hospital() {
           fullWidth={true}
           maxWidth={"lg"}
         >
-          <IconButton
-            aria-label="close"
-            onClick={handleClose}
-            style={{ display: "flex", justifyContent: "flex-end" }}
-          >
-            <CloseIcon />
-          </IconButton>
           <CardContent className={classes.root}>
             <Typography
               gutterBottom
@@ -266,6 +261,14 @@ export default function Hospital() {
               color="primary"
             >
               Equipments Data {selected?.row?.name}
+              <IconButton
+                aria-label="close"
+                onClick={handleClose}
+                open={open}
+                style={{ display: "flex", float: "right" }}
+              >
+                <CloseIcon />
+              </IconButton>
             </Typography>
             {equipemntData && (
               <div style={{ height: 400, width: "100%" }}>
