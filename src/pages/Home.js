@@ -19,50 +19,14 @@ const circleProps = {
   borderColor: "#0D6199",
   m: 2,
   style: {
-    width: "10rem",
-    height: "10rem",
+    width: "6rem",
+    height: "6rem",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     color: "white",
     boxShadow: "5px 10px 18px #888888",
     fontSize: "2rem",
-  },
-};
-const homeProps = {
-  style: {
-    backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('MainImage.png')`,
-    //   backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5))`,
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center",
-    backgroundSize: "auto",
-    width: "20rem",
-    height: "35rem",
-    display: "flex",
-    flexGrow: 1,
-    color: "#0D6199",
-    flexDirection: "column",
-    justifyContent: "space-around",
-    alignItems: "flex-start",
-    padding: "2rem",
-
-    textAlign: "center",
-    fontSize: "3rem",
-  },
-};
-const testProps = {
-  style: {
-    color: "white",
-    width: "100%",
-    height: "40rem",
-    display: "flex",
-    flexGrow: 1,
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-
-    textAlign: "center",
-    fontSize: "3rem",
   },
 };
 const circleprops2 = {
@@ -75,10 +39,9 @@ const circleprops2 = {
     cursor: "pointer",
     //   justifyContent:'space-between',
     alignItems: "center",
-    padding: "1rem",
-
+    padding: "5px",
     textAlign: "center",
-    fontSize: "3rem",
+    fontSize: "10px",
   },
 };
 
@@ -128,57 +91,67 @@ const Home = () => {
   return (
     <>
       {/* {homeData[`title${language}`]} */}
-      <Box
-        display="flex"
-        justifyContent="space-around"
-        alignItems="center"
-        flexWrap="wrap"
-      >
-        <Box borderRadius="0%" {...homeProps}>
-          <Box borderRadius="0%" {...testProps}>
+      <div className="container">
+        <div className="row">
+          <div
+            className="col-md-4"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <Typography gutterBottom variant="h5" component="h2">
               Map, Monitor, Install, Operate, Maintain & Repair
+              <Button
+                component={Link}
+                exact
+                to="/request"
+                variant="contained"
+                size="large"
+                color="primary"
+                endIcon={<ArrowRightAltIcon />}
+              >
+                Request Help
+              </Button>
             </Typography>
-            <Button
-              component={Link}
-              exact
-              to="/request"
-              variant="contained"
-              size="large"
-              color="primary"
-              endIcon={<ArrowRightAltIcon />}
-            >
-              Request Help
-            </Button>
-          </Box>
-        </Box>
-        {/* <Box borderRadius="0%" {...testProps} >
-                
-              
-            </Box> */}
-      </Box>
+          </div>
+          <div className="col-md-8">
+            <img
+              src="./MainImage.png"
+              style={{
+                display: "block",
+                width: "70%",
+                height: "300px",
+                marginLeft: "80px",
+              }}
+            ></img>
+          </div>
+        </div>
+      </div>
       <Box
         display="flex"
         justifyContent="center"
         flexWrap="wrap"
-        padding="1rem"
+        padding="15px"
       >
         <Typography gutterBottom variant="h4" component="h2" color="primary">
           Our Achievements
         </Typography>
       </Box>
       {achievementData && (
-        <Box display="flex" justifyContent="center" flexWrap="wrap">
-          {achievementData.results.map((achievement, index) => {
-            return (
-              <Box
-                display="flex"
-                {...circleprops2}
-                key={achievement.id}
-                href={() => {}}
-                onClick={() => handleClick(achievement.title)}
-              >
-                {/* <Link
+        <div className="container">
+          <Box display="flex" justifyContent="center" flexWrap="wrap">
+            {achievementData.results.map((achievement, index) => {
+              return (
+                <Box
+                  display="flex"
+                  {...circleprops2}
+                  key={achievement.id}
+                  href={() => {}}
+                  onClick={() => handleClick(achievement.title)}
+                >
+                  {/* <Link
                   key={achievement.id}
                   to={{
                     pathname: `/about/members`,
@@ -186,145 +159,197 @@ const Home = () => {
                   }}
                   style={{ textDecoration: "none" }}
                 > */}
-                <Box borderRadius="50%" {...circleProps}>
-                  {achievement.number}+
+                  <Box borderRadius="50%" {...circleProps}>
+                    {achievement.number}+
+                  </Box>
+                  <Typography gutterBottom>{achievement.title}</Typography>
+                  {/* </Link> */}
                 </Box>
-                <Typography gutterBottom variant="h5" component="h2">
-                  {achievement.title}
-                </Typography>
-                {/* </Link> */}
-              </Box>
-            );
-          })}
-          {/* <Box display="flex" {...circleprops2}>
-                <Box borderRadius="50%" {...circleProps}>110+</Box>
-                <Typography gutterBottom variant="h5" component="h2">
-                    Hospitals Mapped
-                </Typography>
-            </Box>
-            <Box display="flex" {...circleprops2}>
-                <Box borderRadius="50%" {...circleProps}>433+</Box>
-                <Typography gutterBottom variant="h5" component="h2">
-                    Oxygen Concentrator Tested
-                </Typography>
-            </Box>
-            <Box display="flex" {...circleprops2}>
-                <Box borderRadius="50%" {...circleProps}>255+</Box>
-                <Typography gutterBottom variant="h5" component="h2">
-                    MOT Members
-                </Typography>
-            </Box>
-            <Box display="flex" {...circleprops2}>
-                <Box borderRadius="50%" {...circleProps}>7+</Box>
-                <Typography gutterBottom variant="h5" component="h2">
-                    Request Solved
-                </Typography>
-            </Box> */}
-        </Box>
+              );
+            })}
+          </Box>
+        </div>
       )}
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        flexWrap="wrap"
-        padding="1rem"
-        bgcolor="#0D6199"
-        color="white"
+      <section
+        className="logos"
+        style={{
+          marginTop: "20px",
+          marginBottom: "20px",
+        }}
       >
+        <div className="container">
+          <div className="row">
+            <div className="col-md-5">
+              <label
+                style={{
+                  color: "#0D6199",
+                }}
+              >
+                Lead Organization
+              </label>
+              <ul
+                className="sub-logo-wrap"
+                style={{
+                  display: "flex",
+                  listStyle: "none",
+                  padding: "0px",
+                  margin: "0px",
+                  justifyContent: "space-between",
+                }}
+              >
+                <li style={{ marginRight: "20px" }}>
+                  <img
+                    style={{ width: "100%" }}
+                    src={"/ranlogo.png"}
+                    onClick={() =>
+                      window.open(
+                        "https://" +
+                          allOrganization?.results[15]?.contact_website,
+                        "_blank"
+                      )
+                    }
+                    alt="RAN logo"
+                    className={classes.logo}
+                  />
+                </li>
+                <li style={{ marginRight: "20px" }}>
+                  <img
+                    style={{ width: "100%" }}
+                    src={"/BSNlogo.jpg"}
+                    alt="BSN logo"
+                    onClick={() =>
+                      window.open(
+                        "https://" +
+                          allOrganization?.results[14]?.contact_website,
+                        "_blank"
+                      )
+                    }
+                    className={classes.logo}
+                  />
+                </li>
+              </ul>
+            </div>
+            <div className="col-md-2">
+              <label
+                style={{
+                  color: "#0D6199",
+                }}
+              >
+                Partner Organization
+              </label>
+              <ul
+                className="sub-logo-wrap"
+                style={{
+                  display: "flex",
+                  listStyle: "none",
+                  padding: "0px",
+                  margin: "0px",
+                  justifyContent: "space-evenly",
+                }}
+              >
+                <li style={{ marginRight: "20px" }}>
+                  <img
+                    style={{ width: "100px" }}
+                    src={"/NHRClogo.png"}
+                    onClick={() =>
+                      window.open(
+                        "https://" +
+                          allOrganization?.results[2]?.contact_website,
+                        "_blank"
+                      )
+                    }
+                    alt="NHRC logo"
+                    className={classes.logo}
+                  />
+                </li>
+              </ul>
+            </div>
+            <div className="col-md-5">
+              <label
+                style={{
+                  color: "#0D6199",
+                }}
+              >
+                Supporting Organization
+              </label>
+              <ul
+                className="sub-logo-wrap"
+                style={{
+                  display: "flex",
+                  listStyle: "none",
+                  justifyContent: "space-between",
+                }}
+              >
+                <li style={{ marginRight: "20px" }}>
+                  <img
+                    style={{ width: "100%" }}
+                    src={"/TAFlogo.jpg"}
+                    onClick={() =>
+                      window.open(
+                        "https://" +
+                          allOrganization?.results[1]?.contact_website,
+                        "_blank"
+                      )
+                    }
+                    alt="TAF logo"
+                    className={classes.logo}
+                  />
+                </li>
+                <li style={{ marginRight: "20px" }}>
+                  <img
+                    style={{ width: "100%" }}
+                    src={"/datafordev.png"}
+                    onClick={() =>
+                      window.open("http://www.d4dnepal.org/", "_blank")
+                    }
+                    alt="TAF logo"
+                    className={classes.logo}
+                  />
+                </li>
+                <li style={{ marginRight: "20px" }}>
+                  <img
+                    style={{ width: "100%" }}
+                    src={"/ukaid2.png"}
+                    onClick={() =>
+                      window.open("https://www.ukaiddirect.org/", "_blank")
+                    }
+                    alt="TAF logo"
+                    className={classes.logo}
+                  />
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div className="container">
         <Typography
           gutterBottom
           variant="h5"
           component="h2"
-          color="white"
+          color="black"
           align="center"
+          style={{
+            padding:'10px',
+            fontSize: "16px",
+          }}
         >
-          Join initiative of Robotics Association of Nepal[RAN] & Biotechnology
-          Society of Nepal [BSN] in partnership with Nepal Health Research
-          Council[NHRC] supported by The Asia Foundation [TAF].
+          Join initiative of{" "}
+          <spam style={{ color: "blue" }}>
+            Robotics Association of Nepal[RAN]
+          </spam>{" "}
+          &{" "}
+          <spam style={{ color: "blue" }}>
+            Biotechnology Society of Nepal [BSN]
+          </spam>{" "}
+          in partnership with{" "}
+          <spam style={{ color: "blue" }}>
+            Nepal Health Research Council[NHRC]
+          </spam>{" "}
+          supported by{" "}
+          <spam style={{ color: "blue" }}>The Asia Foundation [TAF]</spam>.
         </Typography>
-      </Box>
-      <Box display="flex" justifyContent="center" flexWrap="wrap">
-        <Box display="flex" {...circleprops2}>
-          <Typography gutterBottom variant="h5" component="h2">
-            Lead Organizations
-          </Typography>
-          <img
-            style={{ width: "250px", marginTop: "20px" }}
-            src={"/BSNlogo.jpg"}
-            alt="BSN logo"
-            onClick={() =>
-              window.open(
-                "https://" + allOrganization?.results[14]?.contact_website,
-                "_blank"
-              )
-            }
-            className={classes.logo}
-          />
-
-          <img
-            src={"/ranlogo.png"}
-            onClick={() =>
-              window.open(
-                "https://" + allOrganization?.results[15]?.contact_website,
-                "_blank"
-              )
-            }
-            alt="RAN logo"
-            className={classes.logo}
-          />
-        </Box>
-        <Box display="flex" {...circleprops2}>
-          <Typography gutterBottom variant="h5" component="h2">
-            Partner Organization
-          </Typography>
-          <img
-            style={{ marginTop: "20px" }}
-            src={"/NHRClogo.png"}
-            onClick={() =>
-              window.open(
-                "https://" + allOrganization?.results[2]?.contact_website,
-                "_blank"
-              )
-            }
-            alt="NHRC logo"
-            className={classes.logo}
-          />
-        </Box>
-        <Box display="flex" {...circleprops2}>
-          <Typography gutterBottom variant="h5" component="h2">
-            Supporting Organization
-          </Typography>
-          <img
-            style={{ marginTop: "20px", width: "250px" }}
-            src={"/TAFlogo.jpg"}
-            onClick={() =>
-              window.open(
-                "https://" + allOrganization?.results[1]?.contact_website,
-                "_blank"
-              )
-            }
-            alt="TAF logo"
-            className={classes.logo}
-          />
-          <img
-            style={{ width: "250px", marginTop: "28px" }}
-            src={"/datafordev.png"}
-            onClick={() => window.open("http://www.d4dnepal.org/", "_blank")}
-            alt="TAF logo"
-            className={classes.logo}
-          />
-
-          <img
-            style={{ width: "250px" }}
-            src={"/ukaid2.png"}
-            onClick={() =>
-              window.open("https://www.ukaiddirect.org/", "_blank")
-            }
-            alt="TAF logo"
-            className={classes.logo}
-          />
-        </Box>
-      </Box>
+      </div>
     </>
   );
 };

@@ -6,10 +6,9 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Home from "./pages/Home";
-import About from "./pages/About";
 import RequestHelp from "./pages/RequestHelp";
 import ApplyMember from "./pages/ApplyMember";
-import Navbar from "./Navbar";
+import Navbaar from "./Navbaar";
 import NotFound from "./pages/404NotFound";
 import NewsResources from "./pages/NewsResources";
 import Footer from "./Footer";
@@ -19,6 +18,10 @@ import Donation from "./pages/Donation";
 import Hospital from "./pages/Hospitals";
 import OxygenConcentratorTested from "./pages/OxygenConcentratorTested";
 import RequestSolved from "./pages/RequestSolved";
+import "bootstrap/dist/css/bootstrap.min.css";
+import MainPage from "./aboutcomponents/MainPage";
+import Organization from "./aboutcomponents/Organization";
+import Contact from "./aboutcomponents/Contact";
 
 const useStyles = makeStyles((theme) => ({
   languageCss: {
@@ -57,25 +60,14 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
-          {/* <div className={classes.languageCss}>
-            <FormControl variant="filled" className={classes.formControl}>
-              <InputLabel htmlFor="filled-age-native-simple">
-                Select Language
-              </InputLabel>
-              <Select native value={language} onChange={handleChange}>
-                <option value={"en"}>English</option>
-                <option value={"np"}>Nepali</option>
-              </Select>
-            </FormControl>
-          </div> */}
           <LanguageContext.Provider value={language}>
-            <Navbar />
+            <Navbaar />
             <Switch>
               <Route exact path="/">
                 <Home />
               </Route>
-              <Route exact path="/about">
-                <About pageValue={0} />
+              <Route exact path="/about/mainpage">
+                <MainPage />
               </Route>
               <Route exact path="/request">
                 <RequestHelp />
@@ -90,16 +82,16 @@ function App() {
                 <Donation />
               </Route>
               <Route exact path="/about/organization">
-                <About pageValue={1} />
+                <Organization />
               </Route>
               <Route exact path="/about/leads">
-                <About pageValue={2} />
+                <Lead />
               </Route>
               <Route exact path="/about/members">
-                <About pageValue={3} />
+                <Member />
               </Route>
               <Route exact path="/about/contact">
-                <About pageValue={4} />
+                <Contact />
               </Route>
               <Route exact path="/hospital">
                 <Hospital />
