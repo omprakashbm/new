@@ -1,116 +1,164 @@
-import React, { useContext } from 'react';
-import { LanguageContext } from '../App';
-import Box from '@material-ui/core/Box';
+import React, { useContext } from "react";
+import { LanguageContext } from "../App";
+
 import Typography from "@material-ui/core/Typography";
-import {Button} from '@material-ui/core';
-import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
-import MenuBookIcon from '@material-ui/icons/MenuBook';
+import { Link } from "react-router-dom";
+import { Button, makeStyles } from "@material-ui/core";
+import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
+import MenuBookIcon from "@material-ui/icons/MenuBook";
 
-const homeProps = {
+const useStyle = makeStyles((theme) => ({
+  main: {
+    height: "600px",
+    position: "realtive",
+    [theme.breakpoints.down("sm")]: {
+      "&:before": {
+        position: "absolute",
+        content: "''",
+        top: 0,
+        left: 0,
+        right: 0,
+        backgroundImage: `url('Requestbackground.svg') `,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        opacity: "0.5",
+        height: "600px",
+      },
+    },
+    [theme.breakpoints.only("md")]: {
+      "&:before": {
+        position: "absolute",
+        content: "''",
+        top: 0,
+        left: 0,
+        right: 0,
+        backgroundImage: `url('Requestbackground.svg') `,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        opacity: "0.7",
+        height: "600px",
+      },
+    },
+    [theme.breakpoints.up("lg")]: {
+      "&:before": {
+        position: "absolute",
+        content: "''",
+        top: 5,
+        left: 0,
+        right: 0,
 
-  style: { 
-      backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url('mot4.jpg')`,
-    //   backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5))`,
-      backgroundRepeat:'no-repeat',
-      backgroundPosition:'center',
-      backgroundSize:'auto',
-      width: '20rem', 
-      height: '25rem',
-      display:'flex',
-      flexGrow:1,
-      color:'#0D6199',
-      flexDirection:'column',
-      justifyContent:'center',
-      alignItems:'center',
-      padding:'5rem',   
-      textAlign:'center',   
-      fontSize:'3rem' },
-};
-const testProps = {
+        backgroundImage: `url('Requestbackground.png') `,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "top 80px right",
+        Width: "600px",
+        height: "600px",
+        opacity: "0.8",
+      },
+    },
+  },
+  head: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: "50px 30px ",
+    position: "relative",
+  },
+  book: {
+    marginTop: "100px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    color: "hsl(205, 78%, 33%)",
+    position: "relative",
+    [theme.breakpoints.down("sm")]: {
+      marginTop: "30px",
+    },
+  },
+  buttoncontainer: {
+    marginTop: "100px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  Button: {
+    "&:hover": { color: "white" },
+  },
+  fillform: {
+    "&:hover": {
+      transform: "translateX(.15rem)",
+    },
+  },
+}));
 
-  style: { 
-     
-      width: 'auto', 
-      height: '40rem',
-      display:'flex',
-      flexGrow:1,
-      color:'white',
-      flexDirection:'column',
-      justifyContent:'flex-start',
-      alignItems:'center',
-      padding:'5rem',   
-      textAlign:'center',   
-      fontSize:'3rem' },
-};
-const circleprops2 = {
-
-  style: { 
-    //   backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5))`,
-      display:'flex',
-      flexGrow:1,
-      color:'#0D6199',
-      flexDirection:'column',
-      
-      alignItems:'center',
-      padding:'1rem',   
- 
-      textAlign:'center',   
-      fontSize:'3rem' },
-};
-const circleProps = {
-//   bgcolor: '#0D6199',
-  borderColor: '#0D6199',
-  m: 3,
-  style: { 
-      width: '25rem', 
-      height: '10rem',
-      display:'flex',
-      flexDirection:'column',
-      justifyContent:'space-around',
-      alignItems:'center',
-      color:'white',
-      fontSize:'3rem' },
-};
 const RequestHelp = () => {
-    const language = useContext(LanguageContext);
-    let homeData={
-        'titleen':'eng title',
-        'titlenp':'np title'
-    }
-    return ( 
-        <>
+  const language = useContext(LanguageContext);
+
+  let homeData = {
+    titleen: "eng title",
+    titlenp: "np title",
+  };
+
+  const classes = useStyle();
+  return (
+    <div className={classes.container}>
+      <div className={classes.main}>
         {/* {homeData[`title${language}`]} */}
-        <Box display="flex" justifyContent="center" alignItems='center' flexWrap='wrap' >
-            <Box borderRadius="0%" {...homeProps} >
-                <Box borderRadius="0%" {...testProps} >
-                    <Typography gutterBottom variant="h5" component="h2" >
-                        Request For Support
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p" color="inherit">
-                            MOT provides the support for the Bio tech. Please find the form link below to request for our support.
-                        </Typography>
-                    <Box borderRadius="5%" {...circleProps}>
-                        <Typography variant="body2" color="textSecondary" component="p" color="inherit">
-                            <MenuBookIcon fontSize="large" />
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p" color="inherit">
-                            Please click the Link below to access Request form.
-                        </Typography>
-            
 
-                    </Box>
-                    <Button variant="contained" onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSecZWbjjuNMHKGsC4R3QdQRkCFoqxUAE6emyWLfNY6WTjOBwA/viewform', '_blank')} size="large" color="primary" endIcon={<ArrowRightAltIcon />} >Fill Form</Button>
+        <div>
+          <div className={classes.head}>
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="h2"
+              style={{ color: "hsl(205, 78%, 33%)", fontSize: "2.25rem" }}
+            >
+              Request For Support
+            </Typography>
+            <Typography variant="body2" style={{ color: "hsl(205, 78%, 33%)" }}>
+              MOT provides the support for the Bio tech. Please find the form
+              link below to request for our support.
+            </Typography>
+          </div>
+          <div className={classes.book}>
+            <Typography variant="body2" component="p">
+              <MenuBookIcon style={{ fontSize: "3rem" }} />
+            </Typography>
+            <Typography variant="body2" component="p">
+              Please click the Link below to access Request form.
+            </Typography>
+          </div>
+          {/* <div className={classes.buttoncontainer}>
+            <Button
+              className={classes.Button}
+              component={Link}
+              exact
+              to="/requestform"
+              variant="contained"
+              size="large"
+              color="primary"
+              endIcon={<ArrowRightAltIcon className={classes.fillform} />}
+            >
+              fill Form
+            </Button>
+          </div> */}
+          <div className={classes.buttoncontainer}>
+            <Button
+              href={
+                "https://docs.google.com/forms/d/e/1FAIpQLSecZWbjjuNMHKGsC4R3QdQRkCFoqxUAE6emyWLfNY6WTjOBwA/viewform"
+              }
+              className={classes.Button}
+              variant="contained"
+              size="large"
+              color="primary"
+              endIcon={<ArrowRightAltIcon className={classes.fillform} />}
+            >
+              fill Form
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-              
-                </Box>
-                  
-              
-            </Box>
-           
-        </Box>
-            
-        </>
-     );
-}
- 
 export default RequestHelp;

@@ -1,87 +1,29 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import React, { useState, useEffect } from "react";
 
+import { makeStyles } from "@material-ui/core/styles";
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+import { fetchURL } from "../apiComponents/FetchComponent";
+import Announcement from "../NewsandResourcesPage/Announcement";
 
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography component="h1">{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
+import Articles from "../NewsandResourcesPage/Articles";
+import More from "../NewsandResourcesPage/More";
+import Videos from "../NewsandResourcesPage/Videos";
+import News from "../NewsandResourcesPage/News";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Nav from "../NewsandResourcesPage/Nav";
+import ApplyMember from "./ApplyMember";
 
 export default function NewsResources() {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [resource, setResource] = useState([]);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  useEffect(() => {
+    const getData = async () => {
+      let { data } = fetchURL("http://127.0.0.1:8000/about/api/resource/en/");
+      setResource(data);
+    };
+    getData();
+  }, []);
 
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example" centered>
-          <Tab label="Announcement" {...a11yProps(0)} />
-          <Tab label="News" {...a11yProps(1)} />
-          <Tab label="Videos" {...a11yProps(2)} />
-          <Tab label="Articles" {...a11yProps(3)} />
-          <Tab label="Miscellaneous" {...a11yProps(4)} />
-        </Tabs>
-      </AppBar>
-      <TabPanel value={value} index={0} >
-        1
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-       2
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        3
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        4
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-        5
-      </TabPanel>
-    </div>
-  );
+  let category;
+  return <div></div>;
 }

@@ -1,33 +1,21 @@
-import {
-  AppBar,
-  Toolbar,
-  Button,
-  Drawer,
-  List,
-  Divider,
-  ListItem,
-  ListItemText,
-  Typography,
-  useMediaQuery,
-  Box,
-} from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { Link, NavLink } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core";
+
 import React from "react";
-import clsx from "clsx";
-import {
-  Navbar,
-  Nav,
-  NavDropdown,
-  Form,
-  FormControl,
-  Container,
-  Tab,
-} from "react-bootstrap";
-import MenuIcon from "@material-ui/icons/Menu";
-import IconButton from "@material-ui/core/IconButton";
+
+import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
+
+const useStyles = makeStyles((theme) => ({
+  mainButton: {
+    "&:hover": {
+      color: "white",
+    },
+  },
+}));
 
 const Navbaar = () => {
+  const classes = useStyles();
   return (
     <Navbar
       sticky="top"
@@ -37,7 +25,7 @@ const Navbaar = () => {
       }}
     >
       <Container>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="/">
           <img
             src={"/logo.jpg"}
             alt="MOT logo"
@@ -66,7 +54,7 @@ const Navbaar = () => {
                   to="/about/mainpage"
                   color="primary"
                 >
-                  About
+                  Main Page
                 </Button>
               </NavDropdown.Item>
               <NavDropdown.Item>
@@ -96,7 +84,7 @@ const Navbaar = () => {
                   to="/about/leads"
                   color="primary"
                 >
-                  Lead
+                  Management
                 </Button>
               </NavDropdown.Item>
               <NavDropdown.Item>
@@ -110,6 +98,17 @@ const Navbaar = () => {
                 </Button>
               </NavDropdown.Item>
             </NavDropdown>
+
+            <Nav.Link>
+              <Button
+                component={NavLink}
+                exact
+                to="/infographics"
+                color="primary"
+              >
+                Infographics
+              </Button>
+            </Nav.Link>
             <Nav.Link>
               <Button component={NavLink} exact to="/hospital" color="primary">
                 Hospitals
@@ -125,8 +124,71 @@ const Navbaar = () => {
                 Join Us
               </Button>
             </Nav.Link>
+            {/* <NavDropdown
+              title={<Button color="primary">News & Resources</Button>}
+              id="basic-nav-dropdown"
+              color="primary"
+            >
+              <NavDropdown.Item>
+                <Button
+                  component={Link}
+                  exact
+                  to="/newsresource/announcement"
+                  color="primary"
+                >
+                  Announcement
+                </Button>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <Button
+                  component={NavLink}
+                  exact
+                  to="/newsresource/news"
+                  color="primary"
+                >
+                  News
+                </Button>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <Button
+                  component={NavLink}
+                  exact
+                  to="/newsresource/videos"
+                  color="primary"
+                >
+                  Videos
+                </Button>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <Button
+                  component={NavLink}
+                  exact
+                  to="/newsresource/article"
+                  color="primary"
+                >
+                  Articles
+                </Button>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <Button
+                  component={NavLink}
+                  exact
+                  to="/newsresource/more"
+                  color="primary"
+                >
+                  More
+                </Button>
+              </NavDropdown.Item>
+            </NavDropdown> */}
             <Nav.Link>
-              <Button component={NavLink} exact to="/request" color="primary">
+              <Button
+                className={classes.mainButton}
+                component={NavLink}
+                exact
+                to="/request"
+                color="primary"
+                variant="contained"
+              >
                 Request Help
               </Button>
             </Nav.Link>

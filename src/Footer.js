@@ -1,12 +1,5 @@
 import React, { useContext } from "react";
 import { LanguageContext } from "./App";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
-import MailOutlineIcon from "@material-ui/icons/MailOutline";
-import PhoneIcon from "@material-ui/icons/Phone";
-import { Link } from "react-router-dom";
-import { Button } from "@material-ui/core";
-import { ThemeProvider, makeStyles } from "@material-ui/core/styles";
 
 const Footer = () => {
   const language = useContext(LanguageContext);
@@ -42,26 +35,26 @@ const Footer = () => {
                 style={{
                   maxWidth: "200px",
                 }}
+                alt="logo"
               ></img>
             </div>
             <div
               className="col-md-4"
               style={{
-                alignItem: "right",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                color: "white",
               }}
             >
-              <label
-                style={{
-                  color: "cornsilk",
-                }}
-              >
-                © 2021 Mission Oxygen Team
-              </label>
+              © 2021 Mission Oxygen Team
             </div>
             <div
               className="col-md-4"
               style={{
-                alignItem: "right",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
               }}
             >
               <ul
@@ -69,18 +62,44 @@ const Footer = () => {
                   listStyle: "none",
                   paddingTop: "20px",
                   display: "flex",
-                  alignContent: "right",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "30%",
                 }}
               >
-                <li>
-                  <img src="./facebook.png" style={{ maxWidth: "30%" }}></img>
-                </li>
-                <li>
-                  <img src="./instagram.png" style={{ maxWidth: "30%" }}></img>
-                </li>
-                <li>
-                  <img src="./twitter.png" style={{ maxWidth: "30%" }}></img>
-                </li>
+                <a href="https://www.facebook.com/nepal.ran" target="_blank">
+                  <li>
+                    <img
+                      src="./facebook.png"
+                      style={{ height: "30px" }}
+                      alt="facebook"
+                    ></img>
+                  </li>
+                </a>
+                <a
+                  href="https://www.instagram.com/roboticsassociationofnepal/"
+                  target="_blank"
+                >
+                  <li>
+                    <img
+                      src="./instagram.png"
+                      style={{ height: "30px" }}
+                      alt="insta"
+                    ></img>
+                  </li>
+                </a>
+                <a
+                  href="https://www.instagram.com/roboticsassociationofnepal/"
+                  target="_blank"
+                >
+                  <li>
+                    <img
+                      src="./twitter.png"
+                      style={{ height: "30px" }}
+                      alt="twitter"
+                    ></img>
+                  </li>
+                </a>
               </ul>
             </div>
           </div>

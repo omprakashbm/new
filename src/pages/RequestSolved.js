@@ -50,7 +50,6 @@ const useStyles = makeStyles((theme) => ({
     "& > *": {
       margin: theme.spacing(1),
     },
-    flexWrap: "wrap",
   },
   field: {
     display: "flex",
@@ -121,7 +120,6 @@ const useStyles = makeStyles((theme) => ({
 export default function RequestSolved() {
   const classes = useStyles();
   const [info, setInfo] = useState({ results: [] });
-  const [readMore, setReadMore] = useState(false);
   const [loading, setloading] = useState(true);
   const [dataIndex, setdataIndex] = useState(0);
   const [modalIndex, setModalIndex] = useState({});

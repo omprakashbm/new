@@ -8,6 +8,11 @@ import CloseIcon from "@material-ui/icons/Close";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import SearchBar from "material-ui-search-bar";
+import { FormControl, Input, InputLabel } from "@material-ui/core";
+
+import { BiSearch } from "react-icons/bi";
+import { GrFormClose } from "react-icons/gr";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,16 +28,10 @@ const useStyles = makeStyles((theme) => ({
 
 const columnsHospital = [
   {
-    field: "id",
-    headerName: "ID",
-    width: 90,
-  },
-
-  {
     field: "date",
     headerName: "View Detail",
     renderCell: (params) => (
-      <strong>
+      <strong style={{ position: "sticky" }}>
         <Button
           variant="contained"
           color="primary"
@@ -50,6 +49,7 @@ const columnsHospital = [
     field: "name",
     headerName: "Name",
     width: 250,
+    // renderCell: (params) => <h3>hello</h3>,
   },
   {
     field: "contact_number",
@@ -71,11 +71,7 @@ const columnsHospital = [
     headerName: "District",
     width: 200,
   },
-  {
-    field: "ward",
-    headerName: "Ward",
-    width: 200,
-  },
+
   {
     field: "address",
     headerName: "Address",
@@ -101,8 +97,8 @@ const columnsEquipment = [
     width: 180,
   },
   {
-    field: "equipment_status",
-    headerName: "Equipment Status",
+    field: "eqiupment_status",
+    headerName: "Eqiupment Status",
     // renderCell: (row) => console.log(row),
     renderCell: (row) => (
       <div
@@ -145,7 +141,7 @@ const columnsEquipment = [
   {
     field: "suppliers",
     headerName: "Suppliers",
-    width: 150,
+    width: 450,
   },
   {
     field: "remarks",
@@ -158,7 +154,9 @@ export default function Hospital() {
   const classes = useStyles();
   let language = useContext(LanguageContext);
   const [hospitalData, setHospitalData] = useState({ results: [] });
+
   const [equipemntData, setEquipemntData] = useState({ results: [] });
+
   const [selected, setSelected] = useState(null);
   const [open, setOpen] = useState(false);
   const [filterData, setFilterData] = useState(columnsEquipment);
@@ -218,6 +216,20 @@ export default function Hospital() {
     return dataCopy;
   };
 
+  const [searched, setSearched] = useState("");
+
+  const requestSearch = (searchedVal) => {
+    const filteredData = hospitalData.results.filter((data) => {
+      return data.name.toLowerCase().includes(searchedVal.toLowerCase());
+    });
+    setHospitalData({ results: filteredData });
+  };
+
+  const cancleSearch = () => {
+    setSearched("");
+    requestSearch(searched);
+  };
+
   return (
     <div className={classes.root}>
       <Card className={classes.root}>
@@ -225,8 +237,33 @@ export default function Hospital() {
           <Typography gutterBottom variant="h5" component="h2" color="primary">
             Hospital Data
           </Typography>
+
           {hospitalData && (
             <div style={{ height: 600, width: "100%" }}>
+              {/* <SearchBar
+                value={searched}
+                onChange={(searchVal) => requestSearch(searchVal)}
+                onCancleSearch={() => cancleSearch()}
+              /> */}
+
+              {/* <div style={{ display: "flex" }}>
+                <FormControl>
+                  <Input
+                    placeholder="search"
+                    type="text"
+                    name="search"
+                    value={setSearchData.search}
+                    onChange={(search) => handleChange(search)}
+                  />
+                </FormControl>
+
+                {searchData.length === 0 ? (
+                  <Button startIcon={<BiSearch />}></Button>
+                ) : (
+                  <Button startIcon={<GrFormClose />}></Button>
+                )}
+              </div> */}
+
               <DataGrid
                 onRowClick={(item) => {
                   console.log(item);
@@ -251,13 +288,6 @@ export default function Hospital() {
           fullWidth={true}
           maxWidth={"lg"}
         >
-          <IconButton
-            aria-label="close"
-            onClick={handleClose}
-            style={{ display: "flex", justifyContent: "flex-end" }}
-          >
-            <CloseIcon />
-          </IconButton>
           <CardContent className={classes.root}>
             <Typography
               gutterBottom
@@ -266,6 +296,14 @@ export default function Hospital() {
               color="primary"
             >
               Equipments Data {selected?.row?.name}
+              <IconButton
+                aria-label="close"
+                onClick={handleClose}
+                open={open}
+                style={{ display: "flex", float: "right" }}
+              >
+                <CloseIcon />
+              </IconButton>
             </Typography>
             {equipemntData && (
               <div style={{ height: 400, width: "100%" }}>
@@ -276,7 +314,7 @@ export default function Hospital() {
                 />
               </div>
             )}
-            {/* 
+            {/*
             {equipemntData ? (
               <div style={{ height: 400, width: "100%" }}>
                 <DataGrid

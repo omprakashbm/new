@@ -22,6 +22,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import MainPage from "./aboutcomponents/MainPage";
 import Organization from "./aboutcomponents/Organization";
 import Contact from "./aboutcomponents/Contact";
+import Requestform from "./pages/Requestform";
+
+import Announcement from "./NewsandResourcesPage/Announcement";
+import Articles from "./NewsandResourcesPage/Articles";
+import News from "./NewsandResourcesPage/News";
+import Videos from "./NewsandResourcesPage/Videos";
+import More from "./NewsandResourcesPage/More";
+import Infographics from "./pages/Infographics";
 
 const useStyles = makeStyles((theme) => ({
   languageCss: {
@@ -66,20 +74,37 @@ function App() {
               <Route exact path="/">
                 <Home />
               </Route>
-              <Route exact path="/about/mainpage">
-                <MainPage />
-              </Route>
+
               <Route exact path="/request">
                 <RequestHelp />
               </Route>
               <Route exact path="/apply">
                 <ApplyMember />
               </Route>
-              <Route exact path="/newsresources">
-                <NewsResources />
+
+              <Route exact path="/newsresource/announcement">
+                <Announcement />
               </Route>
+
+              <Route exact path="/newsresource/article">
+                <Articles />
+              </Route>
+              <Route exact path="/newsresource/news">
+                <News />
+              </Route>
+              <Route exact path="/newsresource/videos">
+                <Videos />
+              </Route>
+              <Route exact path="/newsresource/more">
+                <More />
+              </Route>
+
               <Route exact path="/donation">
                 <Donation />
+              </Route>
+
+              <Route exact path="/about/mainpage">
+                <MainPage />
               </Route>
               <Route exact path="/about/organization">
                 <Organization />
@@ -102,6 +127,14 @@ function App() {
               <Route exact path="/RS">
                 <RequestSolved />
               </Route>
+
+              <Route exact path="/infographics">
+                <Infographics />
+              </Route>
+
+              {/* <Route exact path="/requestform">
+                <Requestform />
+              </Route> */}
 
               <Route path="*">
                 <NotFound />

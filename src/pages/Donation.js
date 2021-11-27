@@ -1,14 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Nonmonetory from '../donationcomponents/Nonmonetory';
-import Monetory from '../donationcomponents/Monetory';
-
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import Nonmonetory from "../donationcomponents/Nonmonetory";
+import Monetory from "../donationcomponents/Monetory";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -39,7 +38,7 @@ TabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
   };
 }
 
@@ -61,16 +60,21 @@ export default function Donation() {
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example" centered>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="simple tabs example"
+          centered
+        >
           <Tab label="Monetary" {...a11yProps(0)} />
           {/* <Tab label="Non-Monetary" {...a11yProps(1)} /> */}
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0} >
+      <TabPanel value={value} index={0}>
         <Monetory />
       </TabPanel>
       <TabPanel value={value} index={1}>
-       {/* <Nonmonetory /> */}
+        {/* <Nonmonetory /> */}
       </TabPanel>
     </div>
   );
