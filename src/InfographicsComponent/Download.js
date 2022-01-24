@@ -1,27 +1,28 @@
-import { Typography } from "@material-ui/core";
 import React from "react";
 import { makeStyles } from "@material-ui/core";
 import { CSVLink } from "react-csv";
 import { BiDownload } from "react-icons/bi";
-import tippy from "react-tippy";
+
+import "tippy.js/animations/perspective.css";
+
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     textDecoration: "none",
-    color: "black",
     borderRadius: 3,
-    backgroundColor: "#ededed",
+    backgroundColor: "hsl(205, 78%, 35%)",
+    color: "white",
+    cursor: "pointer",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     padding: "8px",
-    margin: "10px",
+    marginBottom: 10,
     boxShadow: " 0 5px 20px rgba(0, 0, 0, 0.4)",
     "&:hover": {
-      boxShadow: " 0 5px 20px rgba(0, 0, 0, 0.4)",
-      backgroundColor: "hsl(205, 78%, 35%)",
       color: "white",
-      cursor: "pointer",
     },
   },
 }));
@@ -55,16 +56,17 @@ const Download = ({ all }) => {
     data: all,
   };
   return (
-    <tippy title="click to download data">
+    <Tippy
+      animation="perspective"
+      content={"click to download all equipment data"}
+    >
       <div className="container">
         <CSVLink {...csvReport} className={classes.root}>
-          <Typography variant="h6" component="h2">
-            Download All Equipment Data &nbsp;
-            <BiDownload />
-          </Typography>
+          Download All Equipment Data &nbsp;
+          <BiDownload />
         </CSVLink>
       </div>
-    </tippy>
+    </Tippy>
   );
 };
 

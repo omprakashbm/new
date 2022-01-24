@@ -3,19 +3,12 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyle = makeStyles((theme) => ({
   root: {
-    backgroundColor: "#ededed",
-
     display: "flex",
     justifyContent: "space-between",
     boxShadow: " 0 5px 20px rgba(0, 0, 0, 0.4)",
-
-    "&:hover": {
-      boxShadow: " 0 5px 20px rgba(0, 0, 0, 0.4)",
-      backgroundColor: "hsl(205, 78%, 35%)",
-      color: "white",
-      cursor: "pointer",
-    },
-
+    backgroundColor: "hsl(205, 78%, 35%)",
+    color: "white",
+    cursor: "pointer",
     height: "70px",
     width: "200px",
   },

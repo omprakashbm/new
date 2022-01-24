@@ -277,7 +277,7 @@ export default function ApplyMember() {
                   />
                 </FormControl>
               </div>
-              <img src={"/Mainimage.png"} alt="img" className={classes.image} />
+              <img src="/Mainimage.png" alt="img" className={classes.image} />
             </div>
 
             <FormControl fullWidth>

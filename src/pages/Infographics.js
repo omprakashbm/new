@@ -17,14 +17,7 @@ import ChartVentilator from "../InfographicsComponent/ChartVentilator";
 import Download from "../InfographicsComponent/Download";
 import More from "../InfographicsComponent/More";
 import Map from "../InfographicsComponent/Map/Map";
-import Button from "@material-ui/core/Button";
-
-import HDialyzer from "../homeAggrigatePages/HDialyzer";
-import HOxygenConcentrator from "../homeAggrigatePages/HOxygenConcentrator";
-import HOxygenCylinder from "../homeAggrigatePages/HOxygenCylider";
-import HVentilator from "../homeAggrigatePages/Hventilator";
-import HMore from "../homeAggrigatePages/HMore";
-import FilterDownload from "../InfographicsComponent/FilterDownload";
+import LineChart from "../InfographicsComponent/LineChart";
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -96,8 +89,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const URL1 = "http://backend.motdev.ran.org.np/about/api/equipment/en/";
-const URL2 = "http://127.0.0.1:8000/api/api/resource/detail/";
-const URL3 = "http://127.0.0.1:8000/about/api/hospital/info/en/";
+// const URL2 = "http://127.0.0.1:8000/api/api/resource/detail/";
+// const URL3 = "http://127.0.0.1:8000/about/api/hospital/info/en/";
 
 const Infographics = () => {
   const classes = useStyles();
@@ -119,13 +112,13 @@ const Infographics = () => {
 
   useEffect(() => {
     const gethospitalData = async () => {
-      try {
-        let { data } = await fetchURL(URL3);
-        setHospital(data);
-        setLoading(false);
-      } catch (error) {
-        console.log("error");
-      }
+      // try {
+      //   let { data } = await fetchURL(URL3);
+      //   setHospital(data);
+      //   setLoading(false);
+      // } catch (error) {
+      //   console.log("error");
+      // }
     };
     const getData = async () => {
       try {
@@ -138,14 +131,14 @@ const Infographics = () => {
     };
 
     const getChartData = async () => {
-      try {
-        const resp = await fetch(URL2);
-        const chartData = resp.json();
-        setChartData(chartData);
-        setLoading(false);
-      } catch (error) {
-        console.log("error");
-      }
+      // try {
+      //   const resp = await fetch(URL2);
+      //   const chartData = resp.json();
+      //   setChartData(chartData);
+      //   setLoading(false);
+      // } catch (error) {
+      //   console.log("error");
+      // }
     };
     gethospitalData();
     getData();
@@ -173,17 +166,8 @@ const Infographics = () => {
   let more = [];
   let all = [];
 
-  const [model, setModel] = useState(0);
-
-  const toggleD = () => {
-    setModel(1);
-  };
-  const toggleA = () => {
-    setModel(0);
-  };
-
   return (
-    <div>
+    <div style={{ height: "85vh" }}>
       {loading && (
         <Typography variant="body2" color="textSecondary" component="p">
           <ScaleLoader color={"#1673B6"} />
@@ -198,11 +182,6 @@ const Infographics = () => {
           ) {
             sum1 = sum1 + deta.unit;
             oxygen.push(deta);
-
-            // hospitalName1.push(deta.hospital_info.hospital_name);
-            // equipmentName1.push(deta.equipment_type);
-            // unit1.push(deta.unit);
-            // equipmentStatus1.push(deta.eqiupment_status);
           } else if (
             deta.equipment_type === "Ventilators" ||
             deta.equipment_type === "Ventilator"
@@ -227,7 +206,7 @@ const Infographics = () => {
             more.push(deta);
           }
         })}
-      {chartData &&
+      {/* {chartData &&
         chartData.map((equipment) => {
           if (equipment.Equipment === "oxygen concentrator") {
             OCO.push(parseInt(equipment.Operational));
@@ -245,73 +224,70 @@ const Infographics = () => {
             ORO.push(parseInt(equipment.Operational));
             ORNO.push(parseInt(equipment.Nonoperational));
           }
-        })}
+        })} */}
 
-      <div className="container" style={{ height: "560px" }}>
+      <div className="container">
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-md-7">
             <div className={classes.top}>
               <div>
                 <div
                   style={{
                     display: "flex",
-                    flexWrap: "wrap",
-                    justifyContent: "space-around",
+
+                    justifyContent: "cneter",
                   }}
                 >
-                  <Button
-                    variant="contained"
-                    color="textPrimary"
-                    className={classes.head}
-                    onClick={toggleA}
-                  >
-                    Aggregate data
-                  </Button>
-                  <Button
-                    color="textPrimary"
-                    variant="contained"
-                    className={classes.head}
-                    onClick={toggleD}
-                  >
-                    Download data
-                  </Button>
+                  <h5 style={{ color: "hsl(205,78%,35%" }}>Aggregate data</h5>
                 </div>
 
-                {model === 1 ? (
-                  <div className={classes.main}>
-                    <OxygenConcentrator sum1={sum1} oxygen={oxygen} />
-                    <Ventilator sum2={sum2} ventilator={ventilator} />
-                    <OxygenCylinder sum3={sum3} cylinder={cylinder} />
-                    <Dialyzer sum4={sum4} dialyzer={dialyzer} />
-                    <More sum5={sum5} more={more} />
-                  </div>
-                ) : (
-                  <div className={classes.main}>
-                    <HOxygenConcentrator sum1={sum1} />
-                    <HVentilator sum2={sum2} />
-                    <HOxygenCylinder sum3={sum3} />
-                    <HDialyzer sum4={sum4} />
-                    <HMore sum5={sum5} more={more} />
-                  </div>
-                )}
+                <div className={classes.main}>
+                  <OxygenConcentrator sum1={sum1} oxygen={oxygen} />
+                  <Ventilator sum2={sum2} ventilator={ventilator} />
+                  <OxygenCylinder sum3={sum3} cylinder={cylinder} />
+                  <Dialyzer sum4={sum4} dialyzer={dialyzer} />
+                  <More sum5={sum5} more={more} />
+                </div>
               </div>
 
               {/* <div style={{ marginTop: "20px" }}>
                 <FilterDownload />
               </div> */}
 
-              <div style={{ marginTop: "20px" }}>
+              <div style={{ marginTop: "3px" }}>
                 <Download all={all} />
               </div>
 
               {/* <div>
                 <Map />
-              </div>  */}
+              </div> */}
             </div>
           </div>
 
-          {/* <div className="col-md-5">
-            <Grid className={classes.main1}>
+          <div className="col-md-5">
+            <div
+              style={{
+                marginTop: "5px",
+
+                display: "flex",
+                justifyContent: "center",
+                margin: "0 auto",
+              }}
+            >
+              <LineChart
+                sum1={sum1}
+                oxygen={oxygen}
+                sum2={sum2}
+                ventilator={ventilator}
+                sum3={sum3}
+                cylinder={cylinder}
+                sum4={sum4}
+                dialyzer={dialyzer}
+                sum5={sum5}
+                more={more}
+              />
+            </div>
+            {/* <Grid className={classes.main1}>
               <ChartOxygenConcentrator
                 OCO={OCO}
                 OCNO={OCNO}
@@ -324,8 +300,8 @@ const Infographics = () => {
                 ORNO={ORNO}
                 className={classes.chart}
               />
-            </Grid>
-          </div> */}
+            </Grid> */}
+          </div>
         </div>
       </div>
     </div>

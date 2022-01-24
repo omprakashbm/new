@@ -19,6 +19,7 @@ const Navbaar = () => {
   return (
     <Navbar
       sticky="top"
+      fixed="top"
       expand="lg"
       style={{
         backgroundColor: "white",
@@ -30,15 +31,15 @@ const Navbaar = () => {
             src={"/logo.jpg"}
             alt="MOT logo"
             style={{
-              width: "50%",
+              width: "160px",
             }}
           />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar.Collapse id="basic-navbar-nav" style={{ paddingLeft: "10%" }}>
           <Nav className="me-auto">
             <Nav.Link>
-              <Button component={NavLink} exact to="/" color="primary">
+              <Button component={NavLink} to="/" color="primary">
                 Home
               </Button>
             </Nav.Link>
@@ -48,19 +49,13 @@ const Navbaar = () => {
               color="primary"
             >
               <NavDropdown.Item>
-                <Button
-                  component={Link}
-                  exact
-                  to="/about/mainpage"
-                  color="primary"
-                >
+                <Button component={Link} to="/about/mainpage" color="primary">
                   Main Page
                 </Button>
               </NavDropdown.Item>
               <NavDropdown.Item>
                 <Button
                   component={NavLink}
-                  exact
                   to="/about/organization"
                   color="primary"
                 >
@@ -68,59 +63,39 @@ const Navbaar = () => {
                 </Button>
               </NavDropdown.Item>
               <NavDropdown.Item>
-                <Button
-                  component={NavLink}
-                  exact
-                  to="/about/contact"
-                  color="primary"
-                >
+                <Button component={NavLink} to="/about/contact" color="primary">
                   Contact
                 </Button>
               </NavDropdown.Item>
               <NavDropdown.Item>
-                <Button
-                  component={NavLink}
-                  exact
-                  to="/about/leads"
-                  color="primary"
-                >
+                <Button component={NavLink} to="/about/leads" color="primary">
                   Management
                 </Button>
               </NavDropdown.Item>
               <NavDropdown.Item>
-                <Button
-                  component={NavLink}
-                  exact
-                  to="/about/members"
-                  color="primary"
-                >
+                <Button component={NavLink} to="/about/members" color="primary">
                   Member
                 </Button>
               </NavDropdown.Item>
             </NavDropdown>
 
             <Nav.Link>
-              <Button
-                component={NavLink}
-                exact
-                to="/infographics"
-                color="primary"
-              >
+              <Button component={NavLink} to="/infographics" color="primary">
                 Infographics
               </Button>
             </Nav.Link>
             <Nav.Link>
-              <Button component={NavLink} exact to="/hospital" color="primary">
+              <Button component={NavLink} to="/hospital" color="primary">
                 Hospitals
               </Button>
             </Nav.Link>
             <Nav.Link>
-              <Button component={NavLink} exact to="/donation" color="primary">
+              <Button component={NavLink} to="/donation" color="primary">
                 Donate
               </Button>
             </Nav.Link>
             <Nav.Link>
-              <Button component={NavLink} exact to="/apply" color="primary">
+              <Button component={NavLink} to="/apply" color="primary">
                 Join Us
               </Button>
             </Nav.Link>
@@ -132,7 +107,6 @@ const Navbaar = () => {
               <NavDropdown.Item>
                 <Button
                   component={Link}
-                  exact
                   to="/newsresource/announcement"
                   color="primary"
                 >
@@ -142,7 +116,6 @@ const Navbaar = () => {
               <NavDropdown.Item>
                 <Button
                   component={NavLink}
-                  exact
                   to="/newsresource/news"
                   color="primary"
                 >
@@ -152,7 +125,6 @@ const Navbaar = () => {
               <NavDropdown.Item>
                 <Button
                   component={NavLink}
-                  exact
                   to="/newsresource/videos"
                   color="primary"
                 >
@@ -162,7 +134,6 @@ const Navbaar = () => {
               <NavDropdown.Item>
                 <Button
                   component={NavLink}
-                  exact
                   to="/newsresource/article"
                   color="primary"
                 >
@@ -172,7 +143,6 @@ const Navbaar = () => {
               <NavDropdown.Item>
                 <Button
                   component={NavLink}
-                  exact
                   to="/newsresource/more"
                   color="primary"
                 >
@@ -184,7 +154,6 @@ const Navbaar = () => {
               <Button
                 className={classes.mainButton}
                 component={NavLink}
-                exact
                 to="/request"
                 color="primary"
                 variant="contained"

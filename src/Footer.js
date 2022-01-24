@@ -1,9 +1,6 @@
-import React, { useContext } from "react";
-import { LanguageContext } from "./App";
+import React from "react";
 
 const Footer = () => {
-  const language = useContext(LanguageContext);
-  const preventDefault = (event) => event.preventDefault();
   return (
     <section
       className="footer"
@@ -14,7 +11,7 @@ const Footer = () => {
       <div className="container">
         <footer
           style={{
-            paddingTop: "30px",
+            paddingTop: "12px",
           }}
         >
           <div
@@ -33,7 +30,7 @@ const Footer = () => {
               <img
                 src="./logowhite.png"
                 style={{
-                  maxWidth: "200px",
+                  maxWidth: "150px",
                 }}
                 alt="logo"
               ></img>
@@ -67,7 +64,7 @@ const Footer = () => {
                   gap: "30%",
                 }}
               >
-                <a href="https://www.facebook.com/nepal.ran" target="_blank">
+                <a href="https://www.facebook.com/nepal.ran" target="blank">
                   <li>
                     <img
                       src="./facebook.png"
@@ -78,7 +75,7 @@ const Footer = () => {
                 </a>
                 <a
                   href="https://www.instagram.com/roboticsassociationofnepal/"
-                  target="_blank"
+                  target="blank"
                 >
                   <li>
                     <img
@@ -90,7 +87,7 @@ const Footer = () => {
                 </a>
                 <a
                   href="https://www.instagram.com/roboticsassociationofnepal/"
-                  target="_blank"
+                  target="blank"
                 >
                   <li>
                     <img

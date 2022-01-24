@@ -1,27 +1,27 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
 import { CSVLink } from "react-csv";
-import tippy from "react-tippy";
+import "tippy.js/animations/perspective.css";
+
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
 
 const useStyle = makeStyles((theme) => ({
   root: {
-    backgroundColor: "#ededed",
+    backgroundColor: "hsl(205, 78%, 35%)",
+    color: "white",
+    cursor: "pointer",
     display: "flex",
     justifyContent: "space-between",
     boxShadow: " 0 5px 20px rgba(0, 0, 0, 0.4)",
-    "&:hover": {
-      boxShadow: " 0 5px 20px rgba(0, 0, 0, 0.4)",
-      backgroundColor: "hsl(205, 78%, 35%)",
-      color: "white",
-      cursor: "pointer",
-    },
+
     height: "70px",
     width: "200px",
   },
 
   mainContent: {
     textDecoration: "none",
-    color: "black",
+    color: "white",
     "&:hover": {
       color: "white",
       cursor: "pointer",
@@ -64,7 +64,7 @@ const Ventilator = ({ sum5, more }) => {
     data: more,
   };
   return (
-    <tippy title="click to download data">
+    <Tippy animation="perspective" content={"click to download Agg. data "}>
       <div className={classes.root}>
         <img
           src={"/oxygen (2).png"}
@@ -79,7 +79,7 @@ const Ventilator = ({ sum5, more }) => {
           </div>
         </CSVLink>
       </div>
-    </tippy>
+    </Tippy>
   );
 };
 

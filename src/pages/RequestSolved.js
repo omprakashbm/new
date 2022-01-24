@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-no-target-blank */
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { fetchURL } from "../apiComponents/FetchComponent";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import { Button } from "@material-ui/core";
+
 import Modal from "@material-ui/core/Modal";
-import { Dialog, IconButton } from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 
 import CardContent from "@material-ui/core/CardContent";
@@ -31,10 +31,11 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 425,
 
     // 535
-    minHeight: 590,
+    minHeight: 500,
 
     display: "flex",
     flexDirection: "column",
+
     alignItems: "center",
 
     padding: ".25rem",
@@ -68,8 +69,8 @@ const useStyles = makeStyles((theme) => ({
   img: {
     display: "block",
     margin: "0 auto",
-    height: "220px",
-    width: "300px",
+    height: "250px",
+    width: "350px",
   },
   Doc: {
     margin: "0 auto",
@@ -191,34 +192,43 @@ export default function RequestSolved() {
               <CloseIcon />
             </IconButton>
             <div className={classes.field}>
-              <h3 className={classes.head}>Request From:</h3>
+              <h5 className={classes.head}>Request From:</h5>
               <Typography
                 align="justify"
                 variant="body1"
                 color="textSecondary"
                 component="p"
+                style={{
+                  paddingTop: "3%",
+                }}
               >
                 <p style={{ paddingLeft: "1rem" }}>{modalIndex.request_from}</p>
               </Typography>
             </div>
             <div className={classes.field}>
-              <h3 className={classes.head}>Request For:</h3>
+              <h5 className={classes.head}>Request For:</h5>
               <Typography
                 align="justify"
                 variant="body1"
                 color="textSecondary"
                 component="p"
+                style={{
+                  paddingTop: "3%",
+                }}
               >
                 <p style={{ paddingLeft: "1rem" }}>{modalIndex.request_for}</p>
               </Typography>
             </div>
             <div className={classes.field}>
-              <h3 className={classes.head}>Service Provided:</h3>
+              <h5 className={classes.head}>Service Provided:</h5>
               <Typography
                 align="justify"
                 variant="body1"
                 color="textSecondary"
                 component="p"
+                style={{
+                  paddingTop: "2.5%",
+                }}
               >
                 <p style={{ paddingLeft: "1rem" }}>
                   {modalIndex.support_provided}
@@ -275,16 +285,18 @@ export default function RequestSolved() {
       {info &&
         info.results.map((solved) => {
           return (
-            <div onClick={() => cardClicked(solved.id)}>
-              <Card className={classes.root} key={solved.id}>
+            <div onClick={() => cardClicked(solved.id)} key={solved.id}>
+              <Card className={classes.root}>
                 <CardContent>
                   <div className={classes.field}>
-                    <h3 className={classes.head}>Request From:</h3>
+                    <h5 className={classes.head}>Request From:</h5>
                     <Typography
-                      align="justify"
                       variant="body1"
                       color="textSecondary"
                       component="p"
+                      style={{
+                        paddingTop: "3%",
+                      }}
                     >
                       <p style={{ paddingLeft: "1rem" }}>
                         {solved.request_from}
@@ -292,12 +304,15 @@ export default function RequestSolved() {
                     </Typography>
                   </div>
                   <div className={classes.field}>
-                    <h3 className={classes.head}>Request For:</h3>
+                    <h5 className={classes.head}>Request For:</h5>
                     <Typography
                       align="justify"
                       variant="body1"
                       color="textSecondary"
                       component="p"
+                      style={{
+                        paddingTop: "3%",
+                      }}
                     >
                       <p style={{ paddingLeft: "1rem" }}>
                         {solved.request_for}

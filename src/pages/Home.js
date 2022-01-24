@@ -3,7 +3,7 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { Button } from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
-import { ThemeProvider, makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import { fetchURL } from "../apiComponents/FetchComponent";
 import { LanguageContext } from "../App";
 import HOxygenConcentrator from "../homeAggrigatePages/HOxygenConcentrator";
@@ -37,10 +37,10 @@ const useStyles = makeStyles((theme) => ({
       "&:after": {
         position: "absolute",
         content: "''",
-        top: 100,
+        top: 80,
         left: 0,
         right: 0,
-        backgroundImage: `url('MainImagehome.png') `,
+        backgroundImage: `url('mainImagehome.png') `,
         backgroundRepeat: "no-repeat",
         height: "350px",
         backgroundPosition: "center",
@@ -53,10 +53,10 @@ const useStyles = makeStyles((theme) => ({
       "&:before": {
         position: "absolute",
         content: "''",
-        top: 100,
+        top: 80,
         left: 0,
         right: 0,
-        backgroundImage: `url('MainImagehome.png') `,
+        backgroundImage: `url('mainImagehome.png') `,
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         paddingTop: "10px",
@@ -69,10 +69,10 @@ const useStyles = makeStyles((theme) => ({
       "&:before": {
         position: "absolute",
         content: "''",
-        top: 100,
+        top: 80,
         left: 0,
         right: 0,
-        backgroundImage: `url('MainImagehome.png') `,
+        backgroundImage: `url('mainImagehome.png') `,
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         paddingTop: "10px",
@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
         top: 100,
         left: 0,
         right: 0,
-        backgroundImage: `url('MainImagehome.png') `,
+        backgroundImage: `url('mainImagehome.png') `,
         backgroundRepeat: "no-repeat",
         backgroundPosition: "top right 30%",
         height: "400px",
