@@ -145,7 +145,7 @@ const circleprops2 = {
   },
 };
 
-const URL1 = "http://backend.motdev.ran.org.np/about/api/equipment/en/";
+const URL1 = "https://backend.motdev.ran.org.np/about/api/equipment/en/";
 
 const Home = () => {
   let history = useHistory();
@@ -172,6 +172,7 @@ const Home = () => {
         console.log("error");
       }
     };
+
     getData();
     getDataA();
   }, [language]);
@@ -362,12 +363,14 @@ const Home = () => {
                   style={{ textDecoration: "none" }}
                 > */}
                         <Box borderRadius="50%" {...circleProps}>
-                          {achievement.number}+
+                          {achievement.title === "Request Solved"
+                            ? achievement.snumber
+                            : achievement.number}
+                          +
                         </Box>
                         <Typography gutterBottom>
                           {achievement.title}
                         </Typography>
-                        {/* </Link> */}
                       </Box>
                     );
                   })}

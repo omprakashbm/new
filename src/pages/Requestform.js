@@ -131,9 +131,9 @@ const LiveRequest = () => {
           </Typography>
         </div>
         <div className={classes.InputBox}>
-          <h4 style={{ color: "hsl(205, 78%, 33%)", marginBottom: 5 }}>
+          <h5 style={{ color: "hsl(205, 78%, 33%)", marginBottom: 5 }}>
             Hospital/Health Center Name
-          </h4>
+          </h5>
           <FormControl style={{ width: "55%" }} variant="standard">
             <InputLabel htmlFor="component-simple">Plase Enter!</InputLabel>
             <Input
@@ -146,9 +146,9 @@ const LiveRequest = () => {
           </FormControl>
         </div>
         <div className={classes.InputBox}>
-          <h4 style={{ color: "hsl(205, 78%, 33%)", marginBottom: 0 }}>
+          <h5 style={{ color: "hsl(205, 78%, 33%)", marginBottom: 0 }}>
             Province
-          </h4>
+          </h5>
 
           <FormControl style={{ width: "182px" }}>
             <Select
@@ -168,9 +168,9 @@ const LiveRequest = () => {
           </FormControl>
         </div>
         <div className={classes.InputBox}>
-          <h4 style={{ color: "hsl(205, 78%, 33%)", marginBottom: 5 }}>
+          <h5 style={{ color: "hsl(205, 78%, 33%)", marginBottom: 5 }}>
             Your Full Name
-          </h4>
+          </h5>
           <FormControl variant="standard" style={{ width: "55%" }}>
             <InputLabel htmlFor="component-simple">Your Name!</InputLabel>
             <Input
@@ -183,9 +183,9 @@ const LiveRequest = () => {
           </FormControl>
         </div>
         <div className={classes.InputBox}>
-          <h4 style={{ color: "hsl(205, 78%, 33%)", marginBottom: 5 }}>
+          <h5 style={{ color: "hsl(205, 78%, 33%)", marginBottom: 5 }}>
             Contact Number
-          </h4>
+          </h5>
           <FormControl style={{ width: "55%" }} variant="standard">
             <InputLabel htmlFor="component-simple">Your Number!</InputLabel>
             <Input
@@ -198,9 +198,9 @@ const LiveRequest = () => {
           </FormControl>
         </div>
         <div className={classes.InputBox}>
-          <h4 style={{ color: "hsl(205, 78%, 33%)", marginBottom: 5 }}>
+          <h5 style={{ color: "hsl(205, 78%, 33%)", marginBottom: 5 }}>
             Email Address
-          </h4>
+          </h5>
           <FormControl style={{ width: "55%" }} variant="standard">
             <InputLabel htmlFor="component-simple">Your Email!</InputLabel>
             <Input
@@ -213,7 +213,7 @@ const LiveRequest = () => {
           </FormControl>
         </div>
         <FormGroup className={classes.InputBox}>
-          <h4 style={{ color: "hsl(205, 78%, 33%)" }}>Requested Needed for</h4>
+          <h5 style={{ color: "hsl(205, 78%, 33%)" }}>Requested Needed for</h5>
           <FormControlLabel
             control={
               <Checkbox
@@ -271,9 +271,9 @@ const LiveRequest = () => {
           />
         </FormGroup>
         <div className={classes.InputBox}>
-          <h4 style={{ color: "hsl(205, 78%, 33%)" }}>
+          <h5 style={{ color: "hsl(205, 78%, 33%)" }}>
             What kind of support are you looking for? Share us your challenges.
-          </h4>
+          </h5>
           <FormControl fullWidth variant="standard">
             <TextareaAutosize
               name="textArea"
@@ -285,9 +285,9 @@ const LiveRequest = () => {
           </FormControl>
         </div>
         <div className={classes.InputBox}>
-          <h4 style={{ color: "hsl(205, 78%, 33%)" }}>
+          <h5 style={{ color: "hsl(205, 78%, 33%)" }}>
             How soon would you want this support?
-          </h4>
+          </h5>
           <FormControl component="fieldset">
             <RadioGroup value={radio} onChange={handleRadio}>
               <FormControlLabel
@@ -309,9 +309,9 @@ const LiveRequest = () => {
           </FormControl>
         </div>
         <div className={classes.InputBox}>
-          <h4 style={{ color: "hsl(205, 78%, 33%)" }}>
+          <h5 style={{ color: "hsl(205, 78%, 33%)" }}>
             Anything you would like to share?
-          </h4>
+          </h5>
           <FormControl fullWidth variant="standard">
             <InputLabel htmlFor="component-simple">Please Enter</InputLabel>
             <Input
@@ -337,7 +337,7 @@ const LiveRequest = () => {
             }}
             onClick={clear}
           >
-            <Link to ="/requestform">Clear form </Link>
+            <Link to="/requestform">Clear form </Link>
           </Button>
         </div>
       </div>

@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const URL1 = "http://backend.motdev.ran.org.np/about/api/equipment/en/";
+const URL1 = "https://backend.motdev.ran.org.np/about/api/equipment/en/";
 // const URL2 = "http://127.0.0.1:8000/api/api/resource/detail/";
 // const URL3 = "http://127.0.0.1:8000/about/api/hospital/info/en/";
 
@@ -111,15 +111,15 @@ const Infographics = () => {
   let sum5 = 0;
 
   useEffect(() => {
-    const gethospitalData = async () => {
-      // try {
-      //   let { data } = await fetchURL(URL3);
-      //   setHospital(data);
-      //   setLoading(false);
-      // } catch (error) {
-      //   console.log("error");
-      // }
-    };
+    // const gethospitalData = async () => {
+    //   try {
+    //     let { data } = await fetchURL(URL3);
+    //     setHospital(data);
+    //     setLoading(false);
+    //   } catch (error) {
+    //     console.log("error");
+    //   }
+    // };
     const getData = async () => {
       try {
         let { data } = await fetchURL(URL1);
@@ -130,19 +130,19 @@ const Infographics = () => {
       }
     };
 
-    const getChartData = async () => {
-      // try {
-      //   const resp = await fetch(URL2);
-      //   const chartData = resp.json();
-      //   setChartData(chartData);
-      //   setLoading(false);
-      // } catch (error) {
-      //   console.log("error");
-      // }
-    };
-    gethospitalData();
+    // const getChartData = async () => {
+    //   try {
+    //     const resp = await fetch(URL2);
+    //     const chartData = resp.json();
+    //     setChartData(chartData);
+    //     setLoading(false);
+    //   } catch (error) {
+    //     console.log("error");
+    //   }
+    // };
+    // gethospitalData();
     getData();
-    getChartData();
+    // getChartData();
   }, []);
 
   console.log(hospital);
@@ -235,7 +235,7 @@ const Infographics = () => {
                   style={{
                     display: "flex",
 
-                    justifyContent: "cneter",
+                    justifyContent: "center",
                   }}
                 >
                   <h5 style={{ color: "hsl(205,78%,35%" }}>Aggregate data</h5>
@@ -257,13 +257,12 @@ const Infographics = () => {
               <div style={{ marginTop: "3px" }}>
                 <Download all={all} />
               </div>
-
-              {/* <div>
-                <Map />
-              </div> */}
             </div>
-          </div>
 
+            {/* <div>
+              <Map />
+            </div> */}
+          </div>
           <div className="col-md-5">
             <div
               style={{
@@ -286,8 +285,7 @@ const Infographics = () => {
                 sum5={sum5}
                 more={more}
               />
-            </div>
-            {/* <Grid className={classes.main1}>
+              {/* <Grid className={classes.main1}>
               <ChartOxygenConcentrator
                 OCO={OCO}
                 OCNO={OCNO}
@@ -301,6 +299,7 @@ const Infographics = () => {
                 className={classes.chart}
               />
             </Grid> */}
+            </div>
           </div>
         </div>
       </div>

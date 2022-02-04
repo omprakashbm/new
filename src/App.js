@@ -10,7 +10,7 @@ import RequestHelp from "./pages/RequestHelp";
 import ApplyMember from "./pages/ApplyMember";
 import Navbaar from "./Navbaar";
 import NotFound from "./pages/404NotFound";
-import NewsResources from "./pages/NewsResources";
+
 import Footer from "./Footer";
 import Lead from "./aboutcomponents/Lead";
 import Member from "./aboutcomponents/Member";
@@ -25,6 +25,7 @@ import Contact from "./aboutcomponents/Contact";
 import Requestform from "./pages/Requestform";
 
 import Announcement from "./NewsandResourcesPage/Announcement";
+
 import Articles from "./NewsandResourcesPage/Articles";
 import News from "./NewsandResourcesPage/News";
 import Videos from "./NewsandResourcesPage/Videos";
@@ -132,9 +133,9 @@ function App() {
                 <Infographics />
               </Route>
 
-              {/* <Route exact path="/requestform">
+              <Route exact path="/requestform">
                 <Requestform />
-              </Route> */}
+              </Route>
 
               <Route path="*">
                 <NotFound />

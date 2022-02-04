@@ -1,8 +1,14 @@
-import React from "react";
-import { Grid, Paper, Typography } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
+import { Grid, Typography } from "@material-ui/core";
 
 import { makeStyles } from "@material-ui/core";
 import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
+import { fetchURL } from "../apiComponents/FetchComponent";
+
+import CardContent from "@material-ui/core/CardContent";
+import Modal from "@material-ui/core/Modal";
+import { IconButton } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
 
 const useStyle = makeStyles((theme) => ({
   container: {
@@ -34,12 +40,105 @@ const useStyle = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
   },
+  main: {
+    position: "fixed",
+    width: "80%",
+    margin: "5%",
+    justifyContent: "center",
+    backgroundColor: "white",
+    borderRadius: 12,
+  },
 }));
 
 const Announcement = () => {
   const classes = useStyle();
+  const [artics, setArtics] = useState({ results: [] });
+  const [loading, setLoading] = useState(true);
+  const [modalIndex, setModalIndex] = useState({});
+  const [modalShow, setModalShow] = useState(false);
+
+  useEffect(() => {
+    const getData = async () => {
+      let { loading, data } = await fetchURL(
+        "https://backend.motdev.ran.org.np/about/api/resource/announcement/en/"
+      );
+
+      setArtics(data);
+      setLoading(loading);
+    };
+
+    getData();
+  }, []);
+
+  const handleClick = (id) => {
+    setModalIndex(artics.results.filter((data) => data.id == id)[0]);
+    setModalShow(true);
+    console.log(modalIndex);
+  };
+
+  const handleClose = () => {
+    setModalShow(false);
+  };
+
+  const body = (
+    <div>
+      {modalIndex && (
+        <Grid
+          key={modalIndex.id}
+          className={classes.main}
+          style={{ height: "80%", overflowY: "scroll" }}
+        >
+          <div className="container">
+            <CardContent className={classes.scroll}>
+              <IconButton
+                aria-label="close"
+                onClick={handleClose}
+                style={{ float: "right" }}
+              >
+                <CloseIcon />
+              </IconButton>
+            </CardContent>
+            <div className={classes.head}>
+              <div className={classes.date}>
+                <span>{modalIndex.created_date}</span>
+              </div>
+              <div
+                style={{
+                  paddingLeft: "15px",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <b>{modalIndex.title}</b>
+              </div>
+            </div>
+            <div style={{ paddingTop: "10px" }}>
+              <p>{modalIndex.content}</p>
+            </div>
+            <div className={classes.schedule}>
+              <div>
+                {/* time duretion */}
+
+                <span>{modalIndex.slug}</span>
+              </div>
+            </div>
+          </div>
+        </Grid>
+      )}
+    </div>
+  );
+
   return (
     <div className={classes.root}>
+      <div>
+        {modalIndex && (
+          <Modal open={modalShow} onClose={handleClose}>
+            {modalIndex && body}
+          </Modal>
+        )}
+      </div>
+
+      {loading && <Typography> Loading...</Typography>}
       <Typography
         variant="h5"
         style={{
@@ -49,100 +148,63 @@ const Announcement = () => {
           margin: "2% 0",
         }}
       >
-        Announcement
+        Announcements
       </Typography>
 
-      <Grid className={classes.container}>
-        <div className={classes.head}>
-          <div className={classes.date}>
-            <span>23</span>
-            <span>Dec</span>
-          </div>
-          <div
-            style={{
-              paddingLeft: "15px",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <b>Vacancy for suppilers</b>
-          </div>
-        </div>
-        <div style={{ paddingTop: "10px" }}>
-          <p>
-            The definite article is the word the. It limits the meaning of a
-            noun to one particular thing. For example, your friend might ask,
-            “Are you going to the party this weekend?” The definite article
-            tells you that your friend is referring to a specific party that
-            both of you know about. The definite article can be used with
-            singular, plural, or uncountable nouns.
-          </p>
-        </div>
-        <div className={classes.schedule}>
-          <div
-            className={classes.arrow}
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              cursor: "pointer",
-            }}
-          >
-            Learn More
-            <ArrowRightAltIcon style={{ paddingTop: "2px" }} />
-          </div>
-          <div>
-            {/* time duretion */}
-            <span>10:00 AM&nbsp;-&nbsp;</span>
-            <span>5:00 PM</span>
-          </div>
-        </div>
-      </Grid>
+      {artics.results.map((item) => {
+        if (
+          item.title !== "सहयोगको लागि कसरी निवेदन दिने" &&
+          item.category === "AN"
+        ) {
+          return (
+            <Grid key={item.id} className={classes.container}>
+              <div className={classes.head}>
+                <div className={classes.date}>
+                  <span>{item.created_date}</span>
+                </div>
+                <div
+                  style={{
+                    paddingLeft: "15px",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <b>{item.title}</b>
+                </div>
+              </div>
+              <div style={{ paddingTop: "10px" }}>
+                <p>{item.content}</p>
+              </div>
+              <div
+                className={classes.schedule}
+                onClick={() => handleClick(item.id)}
+              >
+                <div
+                  className={classes.arrow}
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    cursor: "pointer",
+                  }}
+                >
+                  {/* <Link
+                    to="/newsresource/announcement/allannouncement"
+                    style={{ textDecoration: "none" }}
+                  > */}
+                  Learn More.
+                  <ArrowRightAltIcon style={{ paddingTop: "2px" }} />
+                  {/* </Link> */}
+                </div>
+                <div>
+                  {/* time duretion */}
 
-      <Grid className={classes.container}>
-        <div className={classes.head}>
-          <div className={classes.date}>
-            <span>23</span>
-            <span>Dec</span>
-          </div>
-          <div
-            style={{
-              paddingLeft: "15px",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <b>Vacancy for suppilers</b>
-          </div>
-        </div>
-        <div style={{ paddingTop: "10px" }}>
-          <p>
-            The definite article is the word the. It limits the meaning of a
-            noun to one particular thing. For example, your friend might ask,
-            “Are you going to the party this weekend?” The definite article
-            tells you that your friend is referring to a specific party that
-            both of you know about. The definite article can be used with
-            singular, plural, or uncountable nouns.
-          </p>
-        </div>
-        <div className={classes.schedule}>
-          <div
-            className={classes.arrow}
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              cursor: "pointer",
-            }}
-          >
-            Learn More
-            <ArrowRightAltIcon style={{ paddingTop: "2px" }} />
-          </div>
-          <div>
-            {/* time duretion */}
-            <span>10:00 AM&nbsp;-&nbsp;</span>
-            <span>5:00 PM</span>
-          </div>
-        </div>
-      </Grid>
+                  <span>{item.slug}</span>
+                </div>
+              </div>
+            </Grid>
+          );
+        }
+      })}
     </div>
   );
 };

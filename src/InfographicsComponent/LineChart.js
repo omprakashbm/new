@@ -8,7 +8,7 @@ const LineChart = (props) => {
   return (
     <div style={{ marginTop: "20px" }}>
       <h5 style={{ color: "hsl(205, 80%, 40%)" }}>
-        Graphical representation of aggrigate data
+        Graphical representation of aggregate data
       </h5>
       <Doughnut
         data={{
