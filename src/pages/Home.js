@@ -248,7 +248,8 @@ const Home = () => {
           <div className={classes.topContainer}>
             <div style={{ zIndex: 1 }}>
               <Typography gutterBottom variant="h5" component="h2">
-                Map, Monitor, Install, Operate, Maintain & Repair <br />
+                Map, Monitor, Install, Operate, Maintain, Repair & Calibration
+                <br />
                 <Button
                   style={{ marginTop: "10px", zIndex: 1 }}
                   className={classes.button}

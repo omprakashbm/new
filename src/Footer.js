@@ -90,10 +90,7 @@ const Footer = () => {
                     ></img>
                   </li>
                 </a>
-                <a
-                  href="https://twitter.com/search?q=missionoxygenteam&src=typed_query&f=top"
-                  target="blank"
-                >
+                <a href="https://twitter.com/mot_oxygenteam" target="blank">
                   <li>
                     <img
                       src="./twitter.png"

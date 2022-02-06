@@ -128,6 +128,8 @@ const Announcement = () => {
     </div>
   );
 
+  const date = [];
+
   return (
     <div className={classes.root}>
       <div>
@@ -156,6 +158,7 @@ const Announcement = () => {
           item.title !== "सहयोगको लागि कसरी निवेदन दिने" &&
           item.category === "AN"
         ) {
+          date.push(item.created_date);
           return (
             <Grid key={item.id} className={classes.container}>
               <div className={classes.head}>
