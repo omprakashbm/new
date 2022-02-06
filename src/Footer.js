@@ -24,6 +24,8 @@ const Footer = () => {
             <div
               className="col-md-4"
               style={{
+                display: "flex",
+                justifyContent: "center",
                 alignItem: "center",
               }}
             >
@@ -64,7 +66,10 @@ const Footer = () => {
                   gap: "30%",
                 }}
               >
-                <a href="https://www.facebook.com/nepal.ran" target="blank">
+                <a
+                  href="https://www.facebook.com/missionoxygenteam"
+                  target="blank"
+                >
                   <li>
                     <img
                       src="./facebook.png"
@@ -74,7 +79,7 @@ const Footer = () => {
                   </li>
                 </a>
                 <a
-                  href="https://www.instagram.com/roboticsassociationofnepal/"
+                  href="https://www.instagram.com/missionoxygenteam/"
                   target="blank"
                 >
                   <li>
@@ -86,7 +91,7 @@ const Footer = () => {
                   </li>
                 </a>
                 <a
-                  href="https://www.instagram.com/roboticsassociationofnepal/"
+                  href="https://twitter.com/search?q=missionoxygenteam&src=typed_query&f=top"
                   target="blank"
                 >
                   <li>
@@ -94,6 +99,18 @@ const Footer = () => {
                       src="./twitter.png"
                       style={{ height: "30px" }}
                       alt="twitter"
+                    ></img>
+                  </li>
+                </a>
+                <a
+                  href="https://www.linkedin.com/company/mission-oxygen-team-mot/"
+                  target="blank"
+                >
+                  <li>
+                    <img
+                      src="./linkedin.png"
+                      style={{ height: "30px" }}
+                      alt="linkedin"
                     ></img>
                   </li>
                 </a>

@@ -56,7 +56,7 @@ const circleProps = {
 };
 const useStyles = makeStyles((theme) => ({
   logo: {
-    height: 400,
+    height: 395,
     maxWidth: 260,
   },
 }));
