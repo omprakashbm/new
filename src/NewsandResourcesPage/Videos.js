@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
+import { fetchURL } from "../apiComponents/FetchComponent";
+import ReactPlayer from "react-player";
 
 const useStyle = makeStyles((theme) => ({
   main: {
@@ -41,8 +43,23 @@ const useStyle = makeStyles((theme) => ({
 
 const News = () => {
   const classes = useStyle();
+  const [video, setVideo] = useState({ results: [] });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const getData = async () => {
+      const { data, loading } = await fetchURL(
+        "https://backend.motdev.ran.org.np/about/api/resource/video/en/"
+      );
+      setVideo(data);
+      setLoading(loading);
+    };
+    getData();
+  }, []);
+
   return (
     <div className={classes.main}>
+      {loading && <h5>Loading...</h5>}
       <div>
         <Typography
           variant="h5"
@@ -69,43 +86,39 @@ const News = () => {
         </p>
       </div>
       <div className={classes.cards}>
-        <Grid className={classes.container}>
-          <img
-            src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1770&q=80"
-            alt="img"
-            className={classes.image}
-          />
-          <div className={classes.datecontainer}>
-            <img
-              src="https://img.icons8.com/small/32/000000/timeline-week.png"
-              alt="date"
-              className={classes.datelogo}
-            />
-            <p style={{ paddingTop: "16px", paddingLeft: "5px" }}>1 jan 2021</p>
-          </div>
-          <div className={classes.videoTitle}>
-            <b style={{ fontWeight: "20rem" }}>Oxygen plant installation</b>
-          </div>
-        </Grid>
-
-        <Grid className={classes.container}>
-          <img
-            src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1770&q=80"
-            alt="img"
-            className={classes.image}
-          />
-          <div className={classes.datecontainer}>
-            <img
-              src="https://img.icons8.com/small/32/000000/timeline-week.png"
-              alt="date"
-              className={classes.datelogo}
-            />
-            <p style={{ paddingTop: "16px", paddingLeft: "5px" }}>1 jan 2021</p>
-          </div>
-          <div className={classes.videoTitle}>
-            <b style={{ fontWeight: "20rem" }}>Oxygen plant installation</b>
-          </div>
-        </Grid>
+        {video.results &&
+          video.results.map((item) => {
+            return (
+              <Grid className={classes.container} key={item.id}>
+                {/* <YouTube vifeoId={item.video_link} size="10px"></YouTube> */}
+                {/* <iframe src={item.video_link}> </iframe> */}
+                <ReactPlayer
+                  width="220px"
+                  height="125px"
+                  url={item.video_link}
+                ></ReactPlayer>
+                <div className={classes.datecontainer}>
+                  <img
+                    src="https://img.icons8.com/small/32/000000/timeline-week.png"
+                    alt="date"
+                    className={classes.datelogo}
+                  />
+                  <p style={{ paddingTop: "16px", paddingLeft: "5px" }}>
+                    {item.created_date}
+                  </p>
+                </div>
+                <div className={classes.videoTitle}>
+                  <a
+                    href={item.video_link}
+                    target="blank"
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    <b style={{ fontWeight: "20rem" }}>{item.title}</b>
+                  </a>
+                </div>
+              </Grid>
+            );
+          })}
       </div>
     </div>
   );

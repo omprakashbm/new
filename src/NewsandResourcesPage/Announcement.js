@@ -9,12 +9,16 @@ import CardContent from "@material-ui/core/CardContent";
 import Modal from "@material-ui/core/Modal";
 import { IconButton } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
+import { BiTime } from "react-icons/bi";
 
 const useStyle = makeStyles((theme) => ({
   container: {
     boxShadow: " 0 5px 15px rgba(0, 0, 0, 0.2)",
     padding: "15px",
-    margin: "20px",
+    marginTop: "20px",
+    marginBottom: "8rem",
+    height: "400px",
+    minWidth: "400px",
   },
   head: {
     display: "flex",
@@ -44,9 +48,17 @@ const useStyle = makeStyles((theme) => ({
     position: "fixed",
     width: "80%",
     margin: "5%",
+
     justifyContent: "center",
+
     backgroundColor: "white",
     borderRadius: 12,
+  },
+
+  card: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-evenly",
   },
 }));
 
@@ -119,6 +131,13 @@ const Announcement = () => {
               <div>
                 {/* time duretion */}
 
+                <BiTime
+                  style={{
+                    alignItems: "center",
+                    paddingBottom: "2px",
+                    marginTop: 0,
+                  }}
+                />
                 <span>{modalIndex.slug}</span>
               </div>
             </div>
@@ -128,86 +147,93 @@ const Announcement = () => {
     </div>
   );
 
-  const date = [];
-
   return (
     <div className={classes.root}>
-      <div>
-        {modalIndex && (
-          <Modal open={modalShow} onClose={handleClose}>
-            {modalIndex && body}
-          </Modal>
-        )}
-      </div>
+      <div className="container">
+        <div>
+          {modalIndex && (
+            <Modal open={modalShow} onClose={handleClose}>
+              {modalIndex && body}
+            </Modal>
+          )}
+        </div>
 
-      {loading && <Typography> Loading...</Typography>}
-      <Typography
-        variant="h5"
-        style={{
-          color: "hsl(205,78%,33%)",
-          display: "flex",
-          justifyContent: "center",
-          margin: "2% 0",
-        }}
-      >
-        Announcements
-      </Typography>
+        {loading && <Typography> Loading...</Typography>}
+        <Typography
+          variant="h5"
+          style={{
+            color: "hsl(205,78%,33%)",
+            display: "flex",
+            justifyContent: "center",
+            margin: "2% 0",
+          }}
+        >
+          Announcements
+        </Typography>
 
-      {artics.results.map((item) => {
-        if (
-          item.title !== "सहयोगको लागि कसरी निवेदन दिने" &&
-          item.category === "AN"
-        ) {
-          date.push(item.created_date);
-          return (
-            <Grid key={item.id} className={classes.container}>
-              <div className={classes.head}>
-                <div className={classes.date}>
-                  <span>{item.created_date}</span>
-                </div>
-                <div
-                  style={{
-                    paddingLeft: "15px",
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  <b>{item.title}</b>
-                </div>
-              </div>
-              <div style={{ paddingTop: "10px" }}>
-                <p>{item.content}</p>
-              </div>
-              <div
-                className={classes.schedule}
-                onClick={() => handleClick(item.id)}
-              >
-                <div
-                  className={classes.arrow}
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    cursor: "pointer",
-                  }}
-                >
-                  {/* <Link
+        <div className={classes.card}>
+          {artics.results.map((item) => {
+            if (
+              item.title !== "सहयोगको लागि कसरी निवेदन दिने" &&
+              item.category === "AN"
+            ) {
+              return (
+                <Grid key={item.id} className={classes.container}>
+                  <div className={classes.head}>
+                    <div className={classes.date}>
+                      <span>{item.created_date}</span>
+                    </div>
+                    <div
+                      style={{
+                        paddingLeft: "15px",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <b>{item.title}</b>
+                    </div>
+                  </div>
+                  <div style={{ paddingTop: "10px" }}>
+                    <p>{item.content}</p>
+                  </div>
+                  <div
+                    className={classes.schedule}
+                    onClick={() => handleClick(item.id)}
+                  >
+                    <div
+                      className={classes.arrow}
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        cursor: "pointer",
+                      }}
+                    >
+                      {/* <Link
                     to="/newsresource/announcement/allannouncement"
                     style={{ textDecoration: "none" }}
                   > */}
-                  Learn More.
-                  <ArrowRightAltIcon style={{ paddingTop: "2px" }} />
-                  {/* </Link> */}
-                </div>
-                <div>
-                  {/* time duretion */}
-
-                  <span>{item.slug}</span>
-                </div>
-              </div>
-            </Grid>
-          );
-        }
-      })}
+                      Learn More.
+                      <ArrowRightAltIcon style={{ paddingTop: "2px" }} />
+                      {/* </Link> */}
+                    </div>
+                    <div>
+                      {/* time duretion */}
+                      <BiTime
+                        style={{
+                          alignItems: "center",
+                          paddingBottom: "2px",
+                          marginTop: 0,
+                        }}
+                      />
+                      <span>{item.slug}</span>
+                    </div>
+                  </div>
+                </Grid>
+              );
+            }
+          })}
+        </div>
+      </div>
     </div>
   );
 };

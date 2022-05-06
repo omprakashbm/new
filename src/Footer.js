@@ -30,7 +30,7 @@ const Footer = () => {
               }}
             >
               <img
-                src="./logowhite.png"
+                src={"/logowhite.png"}
                 style={{
                   maxWidth: "150px",
                 }}
@@ -72,7 +72,7 @@ const Footer = () => {
                 >
                   <li>
                     <img
-                      src="./facebook.png"
+                      src={"/facebook.png"}
                       style={{ height: "30px" }}
                       alt="facebook"
                     ></img>
@@ -84,7 +84,7 @@ const Footer = () => {
                 >
                   <li>
                     <img
-                      src="./instagram.png"
+                      src={"/instagram.png"}
                       style={{ height: "30px" }}
                       alt="insta"
                     ></img>
@@ -93,7 +93,7 @@ const Footer = () => {
                 <a href="https://twitter.com/mot_oxygenteam" target="blank">
                   <li>
                     <img
-                      src="./twitter.png"
+                      src={"/twitter.png"}
                       style={{ height: "30px" }}
                       alt="twitter"
                     ></img>
@@ -105,7 +105,7 @@ const Footer = () => {
                 >
                   <li>
                     <img
-                      src="./linkedin.png"
+                      src={"/linkedin.png"}
                       style={{ height: "30px" }}
                       alt="linkedin"
                     ></img>

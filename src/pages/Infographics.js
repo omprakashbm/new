@@ -89,8 +89,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const URL1 = "https://backend.motdev.ran.org.np/about/api/equipment/en/";
-// const URL2 = "http://127.0.0.1:8000/api/api/resource/detail/";
-// const URL3 = "http://127.0.0.1:8000/about/api/hospital/info/en/";
+const URL2 = "http://127.0.0.1:8000/api/api/resource/detail/";
+const URL3 = "http://127.0.0.1:8000/about/api/hospital/info/en/";
 
 const Infographics = () => {
   const classes = useStyles();
@@ -111,15 +111,15 @@ const Infographics = () => {
   let sum5 = 0;
 
   useEffect(() => {
-    // const gethospitalData = async () => {
-    //   try {
-    //     let { data } = await fetchURL(URL3);
-    //     setHospital(data);
-    //     setLoading(false);
-    //   } catch (error) {
-    //     console.log("error");
-    //   }
-    // };
+    const gethospitalData = async () => {
+      try {
+        let { data } = await fetchURL(URL3);
+        setHospital(data);
+        setLoading(false);
+      } catch (error) {
+        console.log("error");
+      }
+    };
     const getData = async () => {
       try {
         let { data } = await fetchURL(URL1);
@@ -130,19 +130,19 @@ const Infographics = () => {
       }
     };
 
-    // const getChartData = async () => {
-    //   try {
-    //     const resp = await fetch(URL2);
-    //     const chartData = resp.json();
-    //     setChartData(chartData);
-    //     setLoading(false);
-    //   } catch (error) {
-    //     console.log("error");
-    //   }
-    // };
-    // gethospitalData();
+    const getChartData = async () => {
+      try {
+        const resp = await fetch(URL2);
+        const chartData = resp.json();
+        setChartData(chartData);
+        setLoading(false);
+      } catch (error) {
+        console.log("error");
+      }
+    };
+    gethospitalData();
     getData();
-    // getChartData();
+    getChartData();
   }, []);
 
   console.log(hospital);
@@ -206,7 +206,7 @@ const Infographics = () => {
             more.push(deta);
           }
         })}
-      {/* {chartData &&
+      {chartData &&
         chartData.map((equipment) => {
           if (equipment.Equipment === "oxygen concentrator") {
             OCO.push(parseInt(equipment.Operational));
@@ -224,7 +224,7 @@ const Infographics = () => {
             ORO.push(parseInt(equipment.Operational));
             ORNO.push(parseInt(equipment.Nonoperational));
           }
-        })} */}
+        })}
 
       <div className="container">
         <div className="row">
@@ -286,19 +286,19 @@ const Infographics = () => {
                 more={more}
               />
               {/* <Grid className={classes.main1}>
-              <ChartOxygenConcentrator
-                OCO={OCO}
-                OCNO={OCNO}
-                className={classes.chart}
-              />
-              <ChartVentilator VO={VO} VNO={VNO} className={classes.chart} />
-              <ChartDializer DO={DO} DNO={DNO} className={classes.chart} />
-              <ChartOxygenCylinder
-                ORO={ORO}
-                ORNO={ORNO}
-                className={classes.chart}
-              />
-            </Grid> */}
+                <ChartOxygenConcentrator
+                  OCO={OCO}
+                  OCNO={OCNO}
+                  className={classes.chart}
+                />
+                <ChartVentilator VO={VO} VNO={VNO} className={classes.chart} />
+                <ChartDializer DO={DO} DNO={DNO} className={classes.chart} />
+                <ChartOxygenCylinder
+                  ORO={ORO}
+                  ORNO={ORNO}
+                  className={classes.chart}
+                />
+              </Grid> */}
             </div>
           </div>
         </div>

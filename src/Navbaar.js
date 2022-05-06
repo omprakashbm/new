@@ -99,7 +99,7 @@ const Navbaar = () => {
                 Join Us
               </Button>
             </Nav.Link>
-            {/* <NavDropdown
+            <NavDropdown
               title={<Button color="primary">News & Resources</Button>}
               id="basic-nav-dropdown"
               color="primary"
@@ -149,7 +149,7 @@ const Navbaar = () => {
                   More
                 </Button>
               </NavDropdown.Item>
-            </NavDropdown> */}
+            </NavDropdown>
             <Nav.Link>
               <Button
                 className={classes.mainButton}
