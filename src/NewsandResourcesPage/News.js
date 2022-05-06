@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
+import { fetchURL } from "../apiComponents/FetchComponent";
 
 const useStyle = makeStyles((theme) => ({
   main: {
@@ -42,8 +43,23 @@ const useStyle = makeStyles((theme) => ({
 
 const News = () => {
   const classes = useStyle();
+
+  const [news, setNews] = useState({ results: [] });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const getData = async () => {
+      const { data, loading } = await fetchURL(
+        "https://backend.motdev.ran.org.np/about/api/resource/news/en/"
+      );
+      setNews(data);
+      setLoading(loading);
+    };
+    getData();
+  }, []);
   return (
     <div className={classes.main}>
+      {loading && <Typography> Loading...</Typography>}
       <div>
         <Typography
           variant="h5"
@@ -58,6 +74,7 @@ const News = () => {
         </Typography>
 
         <p
+          className="container"
           style={{
             marginTop: 0,
             display: "flex",
@@ -70,44 +87,27 @@ const News = () => {
           operation
         </p>
       </div>
-      <div className={classes.cards}>
-        <div className={classes.container}>
-          <img
-            src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1770&q=80"
-            alt="img"
-            className={classes.image}
-          />
-          <div className={classes.datecontainer}>
-            <img
-              src="https://img.icons8.com/small/32/000000/date-span.png"
-              alt="date"
-              className={classes.datelogo}
-            />
-            <p style={{ paddingTop: "15px" }}> 1 jan 2021</p>
-          </div>
-          <div className={classes.newsTitle}>
-            <b style={{ fontWeight: "20rem" }}>Oxygen plant installation</b>
-          </div>
-        </div>
 
-        <div className={classes.container}>
-          <img
-            src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1770&q=80"
-            alt="img"
-            className={classes.image}
-          />
-          <div className={classes.datecontainer}>
-            <img
-              src="https://img.icons8.com/small/32/000000/date-span.png"
-              alt="date"
-              className={classes.datelogo}
-            />
-            <p style={{ paddingTop: "15px" }}> 1 jan 2021</p>
-          </div>
-          <div className={classes.newsTitle}>
-            <b style={{ fontWeight: "20rem" }}>Oxygen plant installation</b>
-          </div>
-        </div>
+      <div className={classes.cards}>
+        {news.results &&
+          news.results.map((item) => {
+            return (
+              <div className={classes.container} key={item.id}>
+                <img src={item.image} alt="img" className={classes.image} />
+                <div className={classes.datecontainer}>
+                  <img
+                    src="https://img.icons8.com/small/32/000000/date-span.png"
+                    alt="date"
+                    className={classes.datelogo}
+                  />
+                  <p style={{ paddingTop: "15px" }}>{item.created_date}</p>
+                </div>
+                <div className={classes.newsTitle}>
+                  <b style={{ fontWeight: "20rem" }}>{item.title}</b>
+                </div>
+              </div>
+            );
+          })}
       </div>
     </div>
   );

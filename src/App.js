@@ -2,9 +2,7 @@ import React, { useContext } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { makeStyles, createTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
+
 import Home from "./pages/Home";
 import RequestHelp from "./pages/RequestHelp";
 import ApplyMember from "./pages/ApplyMember";
